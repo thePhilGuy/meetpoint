@@ -3,13 +3,13 @@
     <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
 
     <ul id="joined_sessions">
-        @for(s <- u.joinedSessions) {
+        @for(s <- u.joinedSessions.iterator()) {
             <li>@s</li>
         }
     </ul>
 
     <ul id="unjoined_sessions">
-        @for(s <- u.unjoinedSessions) {
+        @for(s <- u.unjoinedSessions.iterator()) {
             <li>@s</li>
         }
     </ul>

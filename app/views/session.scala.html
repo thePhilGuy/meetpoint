@@ -5,13 +5,13 @@
     <script src="@routes.Assets.at("/javascripts/google_map.js")"></script>
 
     <ul id="joined_users">
-        @for(u <- s.joinedUsers) {
+        @for(u <- s.joinedUsers.iterator()) {
             <li>@u</li>
         }
     </ul>
 
     <ul id="unjoined_users">
-        @for(u <- s.joinedUsers) {
+        @for(u <- s.unJoinedUsers.iterator()) {
             <li>@u</li>
         }
     </ul>

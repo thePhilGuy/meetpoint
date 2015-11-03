@@ -13,8 +13,8 @@ public class Session extends Model {
 
     public String name;
     public Long hostId;
-    public List<Long> joinedUsers = new ArrayList<Long>();
-    public List<Long> unJoinedUsers = new ArrayList<Long>();
+    public HashSet<Long> joinedUsers = new HashSet<Long>();
+    public HashSet<Long> unJoinedUsers = new HashSet<Long>();
 
     public static Finder<Long,Session> find = new Finder<Long,Session>(
             Long.class, Session.class
