@@ -1,0 +1,16 @@
+@(message: String)
+
+    <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
+
+    <ul id="joined_sessions">
+
+    </ul>
+
+    <ul id="unjoined_sessions">
+
+    </ul>
+
+    <form action="@routes.Session.createSession()" method="post">
+        <input name="name">
+        <input type="submit">
+    </form>
