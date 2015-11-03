@@ -4,11 +4,11 @@
 
 # Home page
 GET         /                                  controllers.Application.login
-POST        /user                              controllers.User.createUser
-POST        /session                           controllers.Session.createSession
-GET         /user/:userId                      controllers.User.showUser(userId: Long)
-GET         /session/:sessionId                controllers.Session.showSession(sessionId: Long)
-POST        /session/:sessionId/:userId        controllers.Session.addUserToSession(sessionId: Long, userId: Long)
+POST        /user                              controllers.UserController.createUser
+POST        /session/:userId                   controllers.SessionController.createSession(userId: Long)
+GET         /user/:userId                      controllers.UserController.showUser(userId: Long)
+GET         /session/:sessionId                controllers.SessionController.showSession(sessionId: Long)
+POST        /session/:sessionId/:userId        controllers.SessionController.inviteUser(sessionId: Long, userId: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET         /assets/*file                      controllers.Assets.at(path="/public", file)

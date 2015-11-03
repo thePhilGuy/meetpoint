@@ -4,13 +4,14 @@
 # --- !Ups
 
 create table session (
-  id                        varchar(255) not null,
+  id                        bigint not null,
   name                      varchar(255),
+  host_id                   varchar(255),
   constraint pk_session primary key (id))
 ;
 
 create table user (
-  id                        varchar(255) not null,
+  id                        bigint not null,
   name                      varchar(255),
   facebook_id               varchar(255),
   is_logged_in              boolean,

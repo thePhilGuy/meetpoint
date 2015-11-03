@@ -1,18 +1,22 @@
-@(message: String)
+@(s: Session)
 
     <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true"></script>
     <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
     <script src="@routes.Assets.at("/javascripts/google_map.js")"></script>
 
     <ul id="joined_users">
-
+        @for(u <- s.joinedUsers) {
+            <li>@u</li>
+        }
     </ul>
 
     <ul id="unjoined_users">
-
+        @for(u <- s.joinedUsers) {
+            <li>@u</li>
+        }
     </ul>
 
-    <form action="@routes.Session.addUserToSession(1,1)" method="post">
+    <form action="@routes.SessionController.inviteUser(1, s.id)" method="post">
         <input name="userId">
         <input type="submit">
     </form>
