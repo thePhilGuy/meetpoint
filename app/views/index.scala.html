@@ -1,16 +1,9 @@
-@(message: String)
-
-@main("Welcome to Play") {
+@(username: String)
 
     <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
-
-    <ul id="user">
-
-    </ul>
 
     <form action="@routes.UserController.createUser()" method="post">
         <input name="name">
         <input type="submit">
     </form>
 
-}
