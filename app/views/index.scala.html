@@ -1,9 +1,0 @@
-@(username: String)
-
-    <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
-
-    <form action="@routes.UserController.createUser()" method="post">
-        <input name="name">
-        <input type="submit">
-    </form>
-

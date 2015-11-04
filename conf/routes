@@ -4,7 +4,7 @@
 
 # Home page
 GET         /                                  controllers.Application.login
-POST        /user                              controllers.UserController.createUser
+GET         /index/:facebookId                 controllers.Application.index(facebookId: String)
 POST        /session/:userId                   controllers.SessionController.createSession(userId: Long)
 GET         /user/:userId                      controllers.UserController.showUser(userId: Long)
 GET         /session/:sessionId                controllers.SessionController.showSession(sessionId: Long)

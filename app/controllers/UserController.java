@@ -10,15 +10,17 @@ import java.util.*;
 
 public class UserController extends Controller {
 
-    public static Result createUser() {
-        User user = Form.form(User.class).bindFromRequest().get();
+    public static Result createUser(String facebookId) {
+        User user = new User();
+        user.facebookId = facebookId;
+        user.isLoggedIn = true;
         user.save();
         return redirect("/user/" + user.id);
     }
 
     public static Result showUser(Long userId) {
         User u = User.find.byId(userId);
-        User userInfo = FacebookWrapper.getUserInfo();
+        //User userInfo = FacebookWrapper.getUserInfo();
         return ok(user.render(u));
     }
 
