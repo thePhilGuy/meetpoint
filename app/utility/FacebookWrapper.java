@@ -15,7 +15,7 @@ public class FacebookWrapper {
     public static String appID = "896964080392435";
     public static String appSecret = "b26ecb19307ecc7b2383a5c644c05856";
     public static String permissions = "email";
-    public static String accessToken = "";
+    public static String accessToken = "CAAMvyLljWPMBAAES1uSodn2ODEYZCHmYCYIhSOWsAEq2ZBlwMI3ZCIyFJOcn88caE77hYrZAN5SMRvZACZA6kAuucotv4vUo4EMEorqgO0RVFHvrK9SqCKli06NSPoVpZAzaDDNDdmv1wljAgHvw5rZBGFWpAyktneu3SmNVCK17VvCJQ57SwEMUGpFIBWMCoOoj8T6ZALmDacgZDZD";
 
     private FacebookWrapper() {
         try {
@@ -36,6 +36,7 @@ public class FacebookWrapper {
             String name = fb.getName();
             String facebookId = fb.getId();
             ResponseList<Friendlist> list = fb.getFriendlists();
+            System.out.println(list);
             User user = new User();
             user.name = name;
             user.facebookId = facebookId;

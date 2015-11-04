@@ -8,6 +8,8 @@ function statusChangeCallback(response) {
     // for FB.getLoginStatus().
     if (response.status === 'connected') {
         // Logged into your app and Facebook.
+        var accessToken = response.authResponse.accessToken;
+        console.log(accessToken);
         testAPI();
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
