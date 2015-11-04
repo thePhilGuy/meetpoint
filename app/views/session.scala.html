@@ -1,15 +1,15 @@
 @(s: Session)
 
-    <script src="https://maps.googleapis.com/maps/api/js?libraries=visualization&sensor=true"></script>
-    <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
-    <script src="@routes.Assets.at("/javascripts/google_map.js")"></script>
+    <div>Host: @s.hostId</div>
 
+    <label for="joined_users">Joined Users:</label>
     <ul id="joined_users">
         @for(u <- s.joinedUsers.iterator()) {
             <li>@u</li>
         }
     </ul>
 
+    <label for="unjoined_users">Unjoined Users:</label>
     <ul id="unjoined_users">
         @for(u <- s.unJoinedUsers.iterator()) {
             <li>@u</li>
@@ -17,9 +17,15 @@
     </ul>
 
     <form action="@routes.SessionController.inviteUser(1, s.id)" method="post">
+        <label>Invite more:</label>
         <input name="userId">
         <input type="submit">
     </form>
 
-    <div id="map"></div>
+    <div id="map" style="height:60%;width:60%"></div>
+
+<script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
+<script src="@routes.Assets.at("/javascripts/google_map.js")"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmTfTysq82Yq56eFrIw9i4jQ7c4HnJw0&callback=initMap" async defer></script>
+
 

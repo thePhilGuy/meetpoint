@@ -27,6 +27,8 @@ public class UserController extends Controller {
         u.unjoinedSessions.remove(sessionId);
         s.joinedUsers.add(userId);
         s.unJoinedUsers.remove(userId);
+        u.save();
+        s.save();
         return redirect("/session/" + sessionId);
     }
 }

@@ -12,7 +12,11 @@ public class SessionController extends Controller {
     public static Result createSession(Long userId) {
         Session session = Form.form(Session.class).bindFromRequest().get();
         session.hostId = userId;
+        session.joinedUsers.add(userId);
         session.save();
+        User user = User.find.byId(userId);
+        user.joinedSessions.add(session.id);
+        user.save();
         return redirect("/session/" + session.id);
     }
 
@@ -26,6 +30,8 @@ public class SessionController extends Controller {
         User u = User.find.byId(userId);
         s.unJoinedUsers.add(userId);
         u.unjoinedSessions.add(sessionId);
+        s.save();
+        u.save();
         return ok();
     }
 }

@@ -6,7 +6,7 @@
 create table session (
   id                        bigint not null,
   name                      varchar(255),
-  host_id                   varchar(255),
+  host_id                   bigint,
   constraint pk_session primary key (id))
 ;
 
