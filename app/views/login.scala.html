@@ -3,8 +3,3 @@
 <script src="@routes.Assets.at("/javascripts/facebook_login.js")"></script>
 <fb:login-button scope="public_profile,email" size="medium" onlogin="checkLoginState();"></fb:login-button>
 <div id="status"></div>
-
-    <form action="@routes.UserController.createUser()" method="post">
-        <input name="name">
-        <input type="submit">
-    </form>
