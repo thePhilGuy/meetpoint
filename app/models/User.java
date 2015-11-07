@@ -12,6 +12,7 @@ public class User extends Model {
 
     public String name;
     public String facebookId;
+    public String userAccessToken;
     public boolean isLoggedIn;
     public List<String> friends = new ArrayList<String>();
 

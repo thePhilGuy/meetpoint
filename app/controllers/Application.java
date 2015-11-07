@@ -16,10 +16,10 @@ public class Application extends Controller {
         return ok(login.render());
     }
 
-    public static Result index(String facebookId) {
+    public static Result index(String facebookId, String accessToken) {
         List<User> users = User.find.where().eq("facebookId", facebookId).findList();
         if(users.isEmpty()) {
-            return UserController.createUser(facebookId);
+            return UserController.createUser(facebookId, accessToken);
         } else {
             return redirect("/user/" + users.get(0).id);
         }

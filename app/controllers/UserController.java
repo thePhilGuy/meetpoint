@@ -10,9 +10,10 @@ import java.util.*;
 
 public class UserController extends Controller {
 
-    public static Result createUser(String facebookId) {
+    public static Result createUser(String facebookId, String accessToken) {
         User user = new User();
         user.facebookId = facebookId;
+        user.userAccessToken = accessToken;
         user.isLoggedIn = true;
         user.save();
         return redirect("/user/" + user.id);
