@@ -3,15 +3,16 @@
     <div>Host: @s.hostId</div>
 
     <label for="joined_users">Joined Users:</label>
+    @s.joinedUsers.size()
     <ul id="joined_users">
-        @for(u <- s.joinedUsers.iterator()) {
+        @for(u <- s.joinedUsers) {
             <li>@u</li>
         }
     </ul>
 
     <label for="unjoined_users">Unjoined Users:</label>
     <ul id="unjoined_users">
-        @for(u <- s.unJoinedUsers.iterator()) {
+        @for(u <- s.unJoinedUsers) {
             <li>@u</li>
         }
     </ul>
@@ -21,6 +22,7 @@
         <input name="userId">
         <input type="submit">
     </form>
+
 
     <div id="map" style="height:60%;width:60%"></div>
 

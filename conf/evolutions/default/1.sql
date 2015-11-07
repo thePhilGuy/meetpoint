@@ -7,6 +7,7 @@ create table session (
   id                        bigint not null,
   name                      varchar(255),
   host_id                   bigint,
+  user_id                   bigint,
   constraint pk_session primary key (id))
 ;
 
@@ -22,6 +23,8 @@ create sequence session_seq;
 
 create sequence user_seq;
 
+alter table session add constraint fk_session_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
+create index ix_session_user_1 on session (user_id);
 
 
 

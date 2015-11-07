@@ -21,18 +21,21 @@ public class UserController extends Controller {
     public static Result showUser(Long userId) {
         User u = User.find.byId(userId);
         //User userInfo = FacebookWrapper.getUserInfo();
+        System.out.println(u.facebookId);
+        System.out.println(u.name);
+        System.out.println(u.joinedSessions.size());
         return ok(user.render(u));
     }
 
     public static Result joinSession(Long userId, Long sessionId) {
         User u = User.find.byId(userId);
         Session s = Session.find.byId(sessionId);
-        u.joinedSessions.add(sessionId);
-        u.unjoinedSessions.remove(sessionId);
-        s.joinedUsers.add(userId);
-        s.unJoinedUsers.remove(userId);
-        u.save();
-        s.save();
+        u.joinedSessions.add(s);
+        u.unjoinedSessions.remove(s);
+        s.joinedUsers.add(u);
+        s.unjoinedUsers.remove(u);
+        u.update();
+        s.update();
         return redirect("/session/" + sessionId);
     }
 }
