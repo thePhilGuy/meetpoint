@@ -24,7 +24,7 @@ public class UserController extends Controller {
         return ok(user.render(u));
     }
 
-    public static Result joinSession(Long userId, Long sessionId) {
+    public static Result joinSession(Long sessionId, Long userId) {
         User u = User.find.byId(userId);
         Session s = Session.find.byId(sessionId);
         u.joinedSessions.add(s);
@@ -33,7 +33,7 @@ public class UserController extends Controller {
         s.unjoinedUsers.remove(u);
         u.update();
         s.update();
-        return redirect("/session/" + sessionId);
+        return redirect("/session/" + sessionId + "/" + userId);
     }
 
 }

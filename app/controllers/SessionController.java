@@ -15,8 +15,8 @@ public class SessionController extends Controller {
         session.joinedUsers.add(user);
         session.save();
         user.joinedSessions.add(session);
-        user.update();
-        return redirect("/session/" + session.id + "," + user.id);
+        //user.update();
+        return redirect("/session/" + session.id + "/" + user.id);
     }
 
     public static Result showSession(Long sessionId, Long userId) {
@@ -36,6 +36,7 @@ public class SessionController extends Controller {
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {
+        System.out.println("Leave");
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);

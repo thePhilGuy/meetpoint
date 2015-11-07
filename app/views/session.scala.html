@@ -1,5 +1,6 @@
 @(s: Session, u: User)
 
+    <div>Session: @s.name</div>
     <div>Host: @s.hostId</div>
 
     <label for="joined_users">Joined Users:</label>
@@ -16,14 +17,14 @@
         }
     </ul>
 
-    <form action="@routes.SessionController.inviteUser(1, s.id)" method="post">
+    <form action="@routes.SessionController.inviteUser(s.id, 1)" method="post">
         <label>Invite more:</label>
         <input name="userId">
         <input type="submit">
     </form>
 
-    <form>
-    <input type="button" value="Leave session" onclick="@routes.SessionController.leaveSession(s.id, u.id)" method="get">
+    <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
+    <input type="Submit" value="Leave">
     </form>
 
     <div id="map" style="height:60%;width:60%"></div>
