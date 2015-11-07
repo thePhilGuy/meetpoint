@@ -7,7 +7,6 @@ create table session (
   id                        bigint not null,
   name                      varchar(255),
   host_id                   bigint,
-  user_id                   bigint,
   constraint pk_session primary key (id))
 ;
 
@@ -19,20 +18,30 @@ create table user (
   constraint pk_user primary key (id))
 ;
 
+
+create table session_user (
+  session_id                     bigint not null,
+  user_id                        bigint not null,
+  constraint pk_session_user primary key (session_id, user_id))
+;
 create sequence session_seq;
 
 create sequence user_seq;
 
-alter table session add constraint fk_session_user_1 foreign key (user_id) references user (id) on delete restrict on update restrict;
-create index ix_session_user_1 on session (user_id);
 
 
+
+alter table session_user add constraint fk_session_user_session_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
+
+alter table session_user add constraint fk_session_user_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
 
 # --- !Downs
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
 drop table if exists session;
+
+drop table if exists session_user;
 
 drop table if exists user;
 

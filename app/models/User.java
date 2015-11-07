@@ -15,10 +15,10 @@ public class User extends Model {
     public boolean isLoggedIn;
     public List<String> friends = new ArrayList<String>();
 
-    @OneToMany(mappedBy = "user")
+    @ManyToMany(mappedBy = "joinedUsers")
     public List<Session> joinedSessions;
 
-    @ManyToMany()
+    @ManyToMany(mappedBy = "unjoinedUsers")
     public List<Session> unjoinedSessions;
 
     public static Finder<Long,User> find = new Finder<Long,User>(

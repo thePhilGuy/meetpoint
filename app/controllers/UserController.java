@@ -21,9 +21,6 @@ public class UserController extends Controller {
     public static Result showUser(Long userId) {
         User u = User.find.byId(userId);
         //User userInfo = FacebookWrapper.getUserInfo();
-        System.out.println(u.facebookId);
-        System.out.println(u.name);
-        System.out.println(u.joinedSessions.size());
         return ok(user.render(u));
     }
 
@@ -38,4 +35,5 @@ public class UserController extends Controller {
         s.update();
         return redirect("/session/" + sessionId);
     }
+
 }

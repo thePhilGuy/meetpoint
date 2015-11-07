@@ -2,7 +2,6 @@ package controllers;
 
 import models.*;
 import play.data.Form;
-import play.libs.Json;
 import play.mvc.*;
 import views.html.session;
 import java.util.*;
@@ -12,30 +11,39 @@ public class SessionController extends Controller {
     public static Result createSession(Long userId) {
         Session session = Form.form(Session.class).bindFromRequest().get();
         session.hostId = userId;
-        session.joinedUsers.add(u);
-        System.out.println(session.joinedUsers.size());
         User user = User.find.byId(userId);
-        session.user = user;
+        session.joinedUsers.add(user);
         session.save();
-        user.sessions.add(session);
-        user.joinedSessions.add(session.id);
-        System.out.println(user.sessions.size());
+        user.joinedSessions.add(session);
         user.update();
-        return redirect("/session/" + session.id);
+        return redirect("/session/" + session.id + "," + user.id);
     }
 
-    public static Result showSession(Long sessionId) {
+    public static Result showSession(Long sessionId, Long userId) {
         Session s = Session.find.byId(sessionId);
-        return ok(session.render(s));
+        User u = User.find.byId(userId);
+        return ok(session.render(s, u));
     }
 
     public static Result inviteUser(Long sessionId, Long userId) {
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
-        s.unJoinedUsers.add(userId);
-        u.unjoinedSessions.add(sessionId);
+        s.unjoinedUsers.add(u);
+        u.unjoinedSessions.add(s);
         s.update();
         u.update();
         return ok();
+    }
+
+    public static Result leaveSession(Long sessionId, Long userId) {
+        Session s = Session.find.byId(sessionId);
+        User u = User.find.byId(userId);
+        s.joinedUsers.remove(u);
+        s.unjoinedUsers.add(u);
+        s.update();
+        u.joinedSessions.remove(s);
+        u.unjoinedSessions.add(s);
+        u.update();
+        return redirect("/user/" + u.id);
     }
 }

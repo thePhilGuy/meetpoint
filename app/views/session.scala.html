@@ -1,19 +1,18 @@
-@(s: Session)
+@(s: Session, u: User)
 
     <div>Host: @s.hostId</div>
 
     <label for="joined_users">Joined Users:</label>
-    @s.joinedUsers.size()
     <ul id="joined_users">
         @for(u <- s.joinedUsers) {
-            <li>@u</li>
+            <li>@u.facebookId</li>
         }
     </ul>
 
     <label for="unjoined_users">Unjoined Users:</label>
     <ul id="unjoined_users">
-        @for(u <- s.unJoinedUsers) {
-            <li>@u</li>
+        @for(u <- s.unjoinedUsers) {
+            <li>@u.facebookId</li>
         }
     </ul>
 
@@ -23,6 +22,9 @@
         <input type="submit">
     </form>
 
+    <form>
+    <input type="button" value="Leave session" onclick="@routes.SessionController.leaveSession(s.id, u.id)" method="get">
+    </form>
 
     <div id="map" style="height:60%;width:60%"></div>
 

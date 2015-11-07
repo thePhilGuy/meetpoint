@@ -7,13 +7,13 @@
     <label for="unjoined_sessions">Unjoined sessions:</label>
     <ul id="unjoined_sessions">
         @for(s <- u.unjoinedSessions) {
-            <li>@s 1</li>
+            <li>@s.name</li>
         }
     </ul>
 
     <label for="joined_sessions">Joined sessions:</label>
     <ul id="joined_sessions">
-        @for(s <- u.sessions) {
+        @for(s <- u.joinedSessions) {
             <li>@s.name</li>
         }
     </ul>
