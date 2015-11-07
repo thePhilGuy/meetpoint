@@ -1,4 +1,4 @@
-@(s: Session)
+@(s: Session, u: User)
 
     <div>Host: @s.hostId</div>
 
@@ -20,6 +20,10 @@
         <label>Invite more:</label>
         <input name="userId">
         <input type="submit">
+    </form>
+
+    <form>
+    <input type="button" value="Leave session" onclick="@routes.SessionController.leaveSession(s.id, u.id)" method="get">
     </form>
 
     <div id="map" style="height:60%;width:60%"></div>

@@ -17,12 +17,13 @@ public class SessionController extends Controller {
         User user = User.find.byId(userId);
         user.joinedSessions.add(session.id);
         user.save();
-        return redirect("/session/" + session.id);
+        return redirect("/session/" + session.id + "," + user.id);
     }
 
-    public static Result showSession(Long sessionId) {
+    public static Result showSession(Long sessionId, Long userId) {
         Session s = Session.find.byId(sessionId);
-        return ok(session.render(s));
+        User u = User.find.byId(userId);
+        return ok(session.render(s, u));
     }
 
     public static Result inviteUser(Long sessionId, Long userId) {
@@ -33,5 +34,20 @@ public class SessionController extends Controller {
         s.save();
         u.save();
         return ok();
+    }
+
+    public static Result leaveSession(Long sessionId, Long userId) {
+        Session s = Session.find.byId(sessionId);
+        User u = User.find.byId(userId);
+
+        s.joinedUsers.remove(userId);
+        s.unJoinedUsers.add(userId);
+        s.save();
+
+        u.joinedSessions.remove(sessionId);
+        u.unjoinedSessions.add(sessionId);
+        u.save();
+
+        return redirect("/user/" + u.id);
     }
 }

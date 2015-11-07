@@ -35,4 +35,5 @@ public class UserController extends Controller {
         s.save();
         return redirect("/session/" + sessionId);
     }
+
 }
