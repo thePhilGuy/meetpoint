@@ -8,14 +8,14 @@
     <label for="unjoined_sessions">Unjoined sessions:</label>
     <ul id="unjoined_sessions">
         @for(s <- u.unjoinedSessions) {
-            <li ><a value="@s.id" onclick="joinSession(this.value, @u.id)" href="#">@s.name</a></li>
+            <li><a href="javascript:joinSession(@s.id, @u.id);">@s.name</a></li>
         }
     </ul>
 
     <label for="joined_sessions">Joined sessions:</label>
     <ul id="joined_sessions">
         @for(s <- u.joinedSessions) {
-            <li value="@s.id"  onclick="showSession(this.value, @u.id)"><a href="#">@s.name</a></li>
+            <li><a href="javascript:showSession(@s.id, @u.id)">@s.name</a></li>
         }
     </ul>
 

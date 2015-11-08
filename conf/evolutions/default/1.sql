@@ -14,6 +14,7 @@ create table user (
   id                        bigint not null,
   name                      varchar(255),
   facebook_id               varchar(255),
+  user_access_token         varchar(255),
   is_logged_in              boolean,
   constraint pk_user primary key (id))
 ;
