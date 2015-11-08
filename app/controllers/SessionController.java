@@ -29,13 +29,12 @@ public class SessionController extends Controller {
         User u = User.find.byId(userId);
         s.unjoinedUsers.add(u);
         u.unjoinedSessions.add(s);
-        s.update();
-        u.update();
+        //s.update();
+        //u.update();
         return ok();
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {
-        System.out.println("Leave");
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
