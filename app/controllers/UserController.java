@@ -2,7 +2,6 @@ package controllers;
 
 import models.*;
 import play.data.Form;
-import play.libs.Json;
 import play.mvc.*;
 import utility.FacebookWrapper;
 import views.html.*;

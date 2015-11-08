@@ -1,9 +1,6 @@
 package utility;
 
-import facebook4j.Facebook;
-import facebook4j.FacebookFactory;
-import facebook4j.Friendlist;
-import facebook4j.ResponseList;
+import facebook4j.*;
 import facebook4j.auth.AccessToken;
 import models.User;
 

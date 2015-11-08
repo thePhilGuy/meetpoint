@@ -4,7 +4,6 @@ import models.*;
 import play.data.Form;
 import play.mvc.*;
 import views.html.session;
-import java.util.*;
 
 public class SessionController extends Controller {
 
@@ -41,9 +40,9 @@ public class SessionController extends Controller {
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
         s.unjoinedUsers.add(u);
-        s.update();
         u.joinedSessions.remove(s);
         u.unjoinedSessions.add(s);
+        s.update();
         u.update();
         return redirect("/user/" + u.id);
     }
