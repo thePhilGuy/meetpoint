@@ -3,17 +3,17 @@
 # ~~~~
 
 # Home page
-GET        /                                        controllers.Application.login
-GET         /index/:facebookId,:accessToken         controllers.Application.index(facebookId: String, accessToken: String)
-POST        /session/:userId                        controllers.SessionController.createSession(userId: Long)
-GET        /user/:userId                            controllers.UserController.showUser(userId: Long)
-GET        /session/:sessionId/:userId              controllers.SessionController.showSession(sessionId: Long,userId: Long)
-POST        /inviteUser/:sessionId/:userId          controllers.SessionController.inviteUser(sessionId: Long, userId: Long)
-GET        /joinSession/:sessionId/:userId          controllers.UserController.joinSession(sessionId: Long, userId: Long)
-POST        /leaveSession/:sessionId/:userId        controllers.SessionController.leaveSession(sessionId: Long, userId: Long)
+GET        /                                       controllers.Application.login
+GET        /index/:facebookId,:accessToken         controllers.Application.index(facebookId: String, accessToken: String)
+POST       /session/:userId                        controllers.SessionController.createSession(userId: Long)
+GET        /user/:userId                           controllers.UserController.showUser(userId: Long)
+GET        /session/:sessionId/:userId             controllers.SessionController.showSession(sessionId: Long,userId: Long)
+POST       /inviteUser/:sessionId/:userId          controllers.SessionController.inviteUser(sessionId: Long, userId: Long)
+GET        /joinSession/:sessionId/:userId         controllers.UserController.joinSession(sessionId: Long, userId: Long)
+POST       /leaveSession/:sessionId/:userId        controllers.SessionController.leaveSession(sessionId: Long, userId: Long)
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                            controllers.Assets.at(path="/public", file)
+GET        /assets/*file                           controllers.Assets.at(path="/public", file)
 
     

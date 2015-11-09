@@ -23,9 +23,20 @@
         }
     </ul>
 
-    <label>More users:</label>
+<!--     <label>More users:</label>
     <input name="userId">
-    <input type="submit" value="Invite" onclick="inviteUser(@s.id)">
+    <input type="submit" value="Invite" onclick="inviteUser(@s.id)"> -->
+
+    @if(u.friends.isEmpty) {
+        <p>You should get your friends to use meetpoint.</p>
+    } else {
+        <label for="friends">
+        <ul id="friends">
+        @for(f <- u.friends) {
+            <li>Invite <a onclick="inviteUser(@s.id)">f.name</a></li>
+        }
+        </ul>
+    }
 
     <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
         <input type="Submit" value="Leave">

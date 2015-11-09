@@ -3,6 +3,9 @@ package utility;
 import facebook4j.*;
 import facebook4j.auth.AccessToken;
 import models.User;
+import java.util.*;
+import models.*;
+import play.db.ebean.Model;
 
 public class FacebookWrapper {
 
@@ -57,24 +60,22 @@ public class FacebookWrapper {
         return "Name not found";
     }
 
-    public static void getFriends(String userToken) {
+    public static List<User> getFriends(String userToken) {
         if(instance == null) {
             instance = new FacebookWrapper();
         }
+        List<User> friendList = new ArrayList<User>();
         try {
             fb.setOAuthAccessToken(new AccessToken(userToken, null));
             ResponseList<Friend> friends = fb.getFriends();
-            if (friends.isEmpty()) System.out.println("Friend list is empty.");
             for (Friend f : friends) {
-                System.out.println("Friend: " + f.getName());
-            }
-            ResponseList<Friendlist> lists = fb.getFriendlists();
-            if (lists.isEmpty()) System.out.println("Friendlist list is empty.");
-            for (Friendlist f : lists) {
-                System.out.println("Friendlist: " + f.getName() + " " + f.getId());
+                User u = User.find.where().eq("facebookId", f.getId()).findUnique();
+                friendList.add(u);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println("In getFriends friendList.size() = " + friendList.size());
+        return friendList;
     }
 }
