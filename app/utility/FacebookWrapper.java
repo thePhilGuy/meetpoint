@@ -63,10 +63,15 @@ public class FacebookWrapper {
         }
         try {
             fb.setOAuthAccessToken(new AccessToken(userToken, null));
-            ResponseList<Friend> list = fb.getFriends();
-            if (list.isEmpty()) System.out.println("Friend list is empty.");
-            for (Friend f : list) {
+            ResponseList<Friend> friends = fb.getFriends();
+            if (friends.isEmpty()) System.out.println("Friend list is empty.");
+            for (Friend f : friends) {
                 System.out.println("Friend: " + f.getName());
+            }
+            ResponseList<Friendlist> lists = fb.getFriendlists();
+            if (lists.isEmpty()) System.out.println("Friendlist list is empty.");
+            for (Friendlist f : lists) {
+                System.out.println("Friendlist: " + f.getName() + " " + f.getId());
             }
         } catch (Exception e) {
             e.printStackTrace();

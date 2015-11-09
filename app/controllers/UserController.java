@@ -21,8 +21,8 @@ public class UserController extends Controller {
 
     public static Result showUser(Long userId) {
         User u = User.find.byId(userId);
-        System.out.println(u.userAccessToken);
-        // FacebookWrapper.getFriends(u.userAccessToken);
+        // System.out.println(u.userAccessToken);
+        FacebookWrapper.getFriends(u.userAccessToken);
         //User userInfo = FacebookWrapper.getUserInfo();
         return ok(user.render(u));
     }
