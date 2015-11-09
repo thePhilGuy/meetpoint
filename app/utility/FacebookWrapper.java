@@ -56,4 +56,20 @@ public class FacebookWrapper {
         }
         return "Name not found";
     }
+
+    public static void getFriends(String userToken) {
+        if(instance == null) {
+            instance = new FacebookWrapper();
+        }
+        try {
+            fb.setOAuthAccessToken(new AccessToken(userToken, null));
+            ResponseList<Friend> list = fb.getFriends();
+            if (list.isEmpty()) System.out.println("Friend list is empty.");
+            for (Friend f : list) {
+                System.out.println("Friend: " + f.getName());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

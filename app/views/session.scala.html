@@ -12,14 +12,14 @@
     <label for="joined_users">Joined Users:</label>
     <ul id="joined_users">
         @for(u <- s.joinedUsers) {
-            <li>@u.facebookId</li>
+            <li>@u.name</li>
         }
     </ul>
 
     <label for="unjoined_users">Unjoined Users:</label>
     <ul id="unjoined_users">
         @for(u <- s.unjoinedUsers) {
-            <li>@u.facebookId</li>
+            <li>@u.name</li>
         }
     </ul>
 
