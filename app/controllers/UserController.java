@@ -12,6 +12,7 @@ public class UserController extends Controller {
     public static Result createUser(String facebookId, String accessToken) {
         User user = new User();
         user.facebookId = facebookId;
+        user.name = FacebookWrapper.getUserName(facebookId, accessToken);
         user.userAccessToken = accessToken;
         user.isLoggedIn = true;
         user.save();

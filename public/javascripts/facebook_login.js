@@ -10,7 +10,7 @@ function statusChangeCallback(response) {
         // Logged into your app and Facebook.
         var accessToken = response.authResponse.accessToken;
         console.log(accessToken);
-        redirectURL();
+        redirectURL(accessToken);
     } else if (response.status === 'not_authorized') {
         // The person is logged into Facebook, but not your app.
         document.getElementById('status').innerHTML = 'Please log ' +
@@ -59,6 +59,7 @@ function redirectURL(accessToken) {
     console.log('Welcome!  Fetching your information.... ');
     FB.api('/me', function(response) {
         console.log('Successful login for: ' + response.name);
+        console.log('With access token: ' + accessToken);
         var url = window.location.href + "index/" + response.id + "," + accessToken;
         window.location.href = url;
     });
