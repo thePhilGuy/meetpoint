@@ -15,45 +15,55 @@
 
     <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@u.name</strong></p>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Unjoined Users</div>
+    <div class="row">
+        <div class="col-md-5">
+            <div class="panel panel-default">
+                <div class="panel-heading">Unjoined Users</div>
 
-        <ul id="unjoined_sessions" class="list-group">
-            @for(u <- s.joinedUsers) {
-                <li class="list-group-item">@u.name</li>
+                <ul id="unjoined_sessions" class="list-group">
+                    @for(u <- s.joinedUsers) {
+                        <li class="list-group-item">@u.name</li>
+                    }
+                </ul>
+            </div>
+
+            <div class="panel panel-default">
+                <div class="panel-heading">Joined Users</div>
+
+                <ul id="joined_sessions"  class="list-group">
+                    @for(u <- s.unjoinedUsers) {
+                        <li class="list-group-item">@u.name</li>
+                    }
+                </ul>
+            </div>
+
+            @if(u.friends.isEmpty) {
+                <p>You should get your friends to use meetpoint.</p>
+            } else {
+                <label for="friends">
+                <ul id="friends">
+                @for(f <- u.friends) {
+                    <li>Invite <a onclick="inviteUser(@s.id)">f.name</a></li>
+                }
+                </ul>
             }
-        </ul>
+
+                <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
+                    <input type="Submit" value="Leave Session">
+                </form>
+        </div>
+
+        <div class="col-md-7">
+            <div class="panel panel-default">
+                <div id="map" style="width: 100%; height: 60vh"></div>
+                <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
+                <script src="@routes.Assets.at("javascripts/google_map.js")"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmTfTysq82Yq56eFrIw9i4jQ7c4HnJw0&callback=initMap" async defer>
+                </script>
+            </div>
+        </div>
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading">Joined Users</div>
 
-        <ul id="joined_sessions"  class="list-group">
-            @for(u <- s.unjoinedUsers) {
-                <li class="list-group-item">@u.name</li>
-            }
-        </ul>
-    </div>
-
-    @if(u.friends.isEmpty) {
-        <p>You should get your friends to use meetpoint.</p>
-    } else {
-        <label for="friends">
-        <ul id="friends">
-        @for(f <- u.friends) {
-            <li>Invite <a onclick="inviteUser(@s.id)">f.name</a></li>
-        }
-        </ul>
-    }
-
-    <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
-        <input type="Submit" value="Leave">
-    </form>
-
-    <div id="map" style="height:60%;width:60%"></div>
-    <script src="@routes.Assets.at("javascripts/jquery-1.9.0.min.js")"></script>
-    <script src="@routes.Assets.at("javascripts/google_map.js")"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmTfTysq82Yq56eFrIw9i4jQ7c4HnJw0&callback=initMap" async defer>
-    </script>
 }
 

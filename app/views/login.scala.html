@@ -3,6 +3,12 @@
 }
 
 @main(title = "- Login")(links) {
-	<fb:login-button scope="public_profile,email,user_friends" size="medium" onlogin="checkLoginState();"></fb:login-button>
-	<div id="status"></div>
+
+	<div class="jumbotron">
+		<h1>Welcome to Meetpoint</h1>
+		<p>Please connect to Facebook using the button below to start using our awesome service.</p>
+		<p style="text-align: center">
+		<fb:login-button scope="public_profile,email,user_friends" size="large" onlogin="checkLoginState();"></fb:login-button>
+		</p>
+	</div>
 }
