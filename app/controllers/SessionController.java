@@ -14,6 +14,9 @@ public class SessionController extends Controller {
         session.joinedUsers.add(user);
         session.save();
         user.joinedSessions.add(session);
+        System.out.println("Created session");
+        user.printJoinedSessions();
+        user.printUnjoinedSessions();
         //user.update();
         return redirect("/session/" + session.id + "/" + user.id);
     }
@@ -21,6 +24,9 @@ public class SessionController extends Controller {
     public static Result showSession(Long sessionId, Long userId) {
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
+        System.out.println("About to render session:");
+        u.printJoinedSessions();
+        u.printUnjoinedSessions();
         return ok(session.render(s, u));
     }
 
