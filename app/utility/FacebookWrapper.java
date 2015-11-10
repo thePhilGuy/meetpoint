@@ -1,5 +1,6 @@
 package utility;
 
+import com.google.gson.Gson;
 import facebook4j.*;
 import facebook4j.auth.AccessToken;
 import models.User;
@@ -60,7 +61,7 @@ public class FacebookWrapper {
         return "Name not found";
     }
 
-    public static List<User> getFriends(String userToken) {
+    public static String getFriends(String userToken) {
         if(instance == null) {
             instance = new FacebookWrapper();
         }
@@ -76,6 +77,16 @@ public class FacebookWrapper {
             e.printStackTrace();
         }
         System.out.println("In getFriends friendList.size() = " + friendList.size());
-        return friendList;
+        return friendListToJson(friendList);
+    }
+
+    public static String friendListToJson(List<User> list) {
+        Gson gson = new Gson();
+        return gson.toJson(list);
+    }
+
+    public static List<User> friendListFromJson(String str) {
+        Gson gson = new Gson();
+        return gson.fromJson(str, List.class);
     }
 }

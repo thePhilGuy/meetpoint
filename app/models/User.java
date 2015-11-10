@@ -14,7 +14,7 @@ public class User extends Model {
     public String facebookId;
     public String userAccessToken;
     public boolean isLoggedIn;
-    public List<User> friends = new ArrayList<User>();
+    public String friends;
 
     @ManyToMany(mappedBy = "joinedUsers")
     public List<Session> joinedSessions;
