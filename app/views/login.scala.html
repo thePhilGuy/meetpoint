@@ -1,7 +1,8 @@
-<head>
-    <title>MeetPoint</title>
-    <script src="@routes.Assets.at("/javascripts/facebook_login.js")"></script>
-</head>
+@links = {
+    <script src="@routes.Assets.at("/javascripts/facebook_login.js")"></script>	
+}
 
-<fb:login-button scope="public_profile,email,user_friends" size="medium" onlogin="checkLoginState();"></fb:login-button>
-<div id="status"></div>
+@main(title = "- Login")(links) {
+	<fb:login-button scope="public_profile,email,user_friends" size="medium" onlogin="checkLoginState();"></fb:login-button>
+	<div id="status"></div>
+}

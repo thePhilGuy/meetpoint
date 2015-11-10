@@ -1,30 +1,48 @@
-@(u: User)
+@(u: User) 
 
-    <head>
-        <title>MeetPoint User</title>
-        <script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
-        <script src="@routes.Assets.at("/javascripts/user_page.js")"></script>
-    </head>
+@links = {
+	<script src="@routes.Assets.at("/javascripts/jquery-1.9.0.min.js")"></script>
+	<script src="@routes.Assets.at("/javascripts/user_page.js")"></script>
+}
 
-    <div>Facebook Id: @u.facebookId</div>
-    <div>Facebook Name: @u.name</div>
+@main(title = "- " + u.name)(links) {
 
-    <label for="unjoined_sessions">Unjoined sessions:</label>
-    <ul id="unjoined_sessions">
-        @for(s <- u.unjoinedSessions) {
-            <li><a href="javascript:joinSession(@s.id, @u.id);">@s.name</a></li>
-        }
-    </ul>
+	<nav class="navbar navbar-default">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="">Meetpoint</a>
+		</div>
+		<p class="navbar-text">Signed in as <a href="@routes.UserController.showUser(u.id)" class="navbar-link">@u.name</a></p>
+	</nav>
 
-    <label for="joined_sessions">Joined sessions:</label>
-    <ul id="joined_sessions">
-        @for(s <- u.joinedSessions) {
-            <li><a href="javascript:showSession(@s.id, @u.id)">@s.name</a></li>
-        }
-    </ul>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Unjoined sessions</div>
 
-    <form action="@routes.SessionController.createSession(u.id)" method="post">
-        <label>Create session:</label>
-        <input name="name">
-        <input type="submit">
-    </form>
+				<ul id="unjoined_sessions" class="list-group">
+					@for(s <- u.unjoinedSessions) {
+						<a class="list-group-item" href="javascript:joinSession(@s.id, @u.id);">@s.name</a>
+					}
+				</ul>
+			</div>
+		</div>
+
+		<div class="col-md-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">Joined sessions</div>
+
+				<ul id="joined_sessions"  class="list-group">
+					@for(s <- u.joinedSessions) {
+						<a href="javascript:showSession(@s.id, @u.id)" class="list-group-item">@s.name</a>
+					}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<form action="@routes.SessionController.createSession(u.id)" method="post">
+		<label>Create session:</label>
+		<input name="name">
+		<input type="submit">
+	</form>
+}
