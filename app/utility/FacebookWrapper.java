@@ -69,7 +69,7 @@ public class FacebookWrapper {
             fb.setOAuthAccessToken(new AccessToken(userToken, null));
             ResponseList<Friend> friends = fb.getFriends();
             for (Friend f : friends) {
-                friendList.add(f.getId());
+                friendList.add(f.getName());
                 System.out.println("Friend: " + f.getName());
             }
         } catch (Exception e) {
@@ -87,5 +87,9 @@ public class FacebookWrapper {
     public static List<String> friendListFromJson(String str) {
         Gson gson = new Gson();
         return gson.fromJson(str, List.class);
+    }
+
+    public static void inviteFriend(String facebookId) {
+        //to do
     }
 }

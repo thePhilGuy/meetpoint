@@ -3,7 +3,10 @@ package controllers;
 import models.*;
 import play.data.Form;
 import play.mvc.*;
+import utility.FacebookWrapper;
 import views.html.session;
+
+import java.util.List;
 
 public class SessionController extends Controller {
 
@@ -23,10 +26,15 @@ public class SessionController extends Controller {
         return ok(session.render(s, u));
     }
 
-    public static Result inviteUser(Long sessionId, Long userId) {
-        System.out.println("Inviting user " + userId + " to session " + sessionId);
+    public static Result inviteUser(Long sessionId, String userName) {
+        System.out.println("Inviting user " + userName + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
-        User u = User.find.byId(userId);
+        List<User> users = User.find.where().eq("name", userName).findList();
+        if(users.isEmpty()) {
+            return badRequest();
+        }
+        User u = users.get(0);
+        FacebookWrapper.inviteFriend(u.facebookId);
         s.unjoinedUsers.add(u);
         s.update();
         u.update();
@@ -42,4 +50,5 @@ public class SessionController extends Controller {
         u.update();
         return redirect("/user/" + u.id);
     }
+
 }
