@@ -22,15 +22,15 @@ create table user (
 
 
 create table session_user_joined (
-  session_id                     bigint not null,
-  user_id                        bigint not null,
-  constraint pk_session_user_joined primary key (session_id, user_id))
+  session_id_joined              bigint not null,
+  user_id_joined                 bigint not null,
+  constraint pk_session_user_joined primary key (session_id_joined, user_id_joined))
 ;
 
 create table session_user_unjoined (
-  session_id                     bigint not null,
-  user_id                        bigint not null,
-  constraint pk_session_user_unjoined primary key (session_id, user_id))
+  session_id_unjoined            bigint not null,
+  user_id_unjoined               bigint not null,
+  constraint pk_session_user_unjoined primary key (session_id_unjoined, user_id_unjoined))
 ;
 create sequence session_seq;
 
@@ -39,13 +39,13 @@ create sequence user_seq;
 
 
 
-alter table session_user_joined add constraint fk_session_user_joined_sessio_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
+alter table session_user_joined add constraint fk_session_user_joined_sessio_01 foreign key (session_id_joined) references session (id) on delete restrict on update restrict;
 
-alter table session_user_joined add constraint fk_session_user_joined_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
+alter table session_user_joined add constraint fk_session_user_joined_user_02 foreign key (user_id_joined) references user (id) on delete restrict on update restrict;
 
-alter table session_user_unjoined add constraint fk_session_user_unjoined_sess_01 foreign key (session_id) references session (id) on delete restrict on update restrict;
+alter table session_user_unjoined add constraint fk_session_user_unjoined_sess_01 foreign key (session_id_unjoined) references session (id) on delete restrict on update restrict;
 
-alter table session_user_unjoined add constraint fk_session_user_unjoined_user_02 foreign key (user_id) references user (id) on delete restrict on update restrict;
+alter table session_user_unjoined add constraint fk_session_user_unjoined_user_02 foreign key (user_id_unjoined) references user (id) on delete restrict on update restrict;
 
 # --- !Downs
 

@@ -17,16 +17,16 @@ public class Session extends Model {
     @ManyToMany
     @JoinTable(
             name = "session_user_joined",
-            joinColumns = {@JoinColumn(name = "session_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "session_id_joined", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id_joined", referencedColumnName = "id")}
     )
     public List<User> joinedUsers;
 
     @ManyToMany
     @JoinTable(
             name="session_user_unjoined",
-            joinColumns = {@JoinColumn(name = "session_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")}
+            joinColumns = {@JoinColumn(name = "session_id_unjoined", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "user_id_unjoined", referencedColumnName = "id")}
     )
     public List<User> unjoinedUsers;
 

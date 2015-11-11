@@ -12,6 +12,7 @@ public class SessionController extends Controller {
         session.hostId = userId;
         User user = User.find.byId(userId);
         session.joinedUsers.add(user); //only add record to session_user_joined once
+        //user.joinedSessions.add(session);
         session.save();
         user.update();
         user.printJoinedSessions();
@@ -27,6 +28,8 @@ public class SessionController extends Controller {
         System.out.println("About to render session:");
         u.printJoinedSessions();
         u.printUnjoinedSessions();
+        s.printJoinedUsers();
+        s.printunjoinedUsers();
         return ok(session.render(s, u));
     }
 
@@ -45,8 +48,8 @@ public class SessionController extends Controller {
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
         s.unjoinedUsers.add(u);
-        u.joinedSessions.remove(s);
-        u.unjoinedSessions.add(s);
+        //u.joinedSessions.remove(s);
+        //u.unjoinedSessions.add(s);
         s.update();
         u.update();
         return redirect("/user/" + u.id);
