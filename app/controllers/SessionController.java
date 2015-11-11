@@ -24,6 +24,7 @@ public class SessionController extends Controller {
     }
 
     public static Result inviteUser(Long sessionId, Long userId) {
+        System.out.println("Inviting user " + userId + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.unjoinedUsers.add(u);
