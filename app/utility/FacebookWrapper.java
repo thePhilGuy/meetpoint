@@ -16,7 +16,6 @@ public class FacebookWrapper {
     public static String appID = "896964080392435";
     public static String appSecret = "b26ecb19307ecc7b2383a5c644c05856";
     public static String permissions = "email";
-    // public static String accessToken = "CAAMvyLljWPMBAAES1uSodn2ODEYZCHmYCYIhSOWsAEq2ZBlwMI3ZCIyFJOcn88caE77hYrZAN5SMRvZACZA6kAuucotv4vUo4EMEorqgO0RVFHvrK9SqCKli06NSPoVpZAzaDDNDdmv1wljAgHvw5rZBGFWpAyktneu3SmNVCK17VvCJQ57SwEMUGpFIBWMCoOoj8T6ZALmDacgZDZD";
 
     private FacebookWrapper() {
         try {
@@ -61,7 +60,7 @@ public class FacebookWrapper {
         return "Name not found";
     }
 
-    public static List<String> getFriends(String userToken) {
+    public static String getFriends(String userToken) {
         if(instance == null) {
             instance = new FacebookWrapper();
         }
@@ -77,16 +76,16 @@ public class FacebookWrapper {
             e.printStackTrace();
         }
         System.out.println("In getFriends friendList = " + friendList);
-        return friendList;
+        return friendListToJson(friendList);
     }
 
-    // public static String friendListToJson(List<User> list) {
-    //     Gson gson = new Gson();
-    //     return gson.toJson(list);
-    // }
+    public static String friendListToJson(List<String> list) {
+        Gson gson = new Gson();
+        return gson.toJson(list);
+    }
 
-    // public static List<User> friendListFromJson(String str) {
-    //     Gson gson = new Gson();
-    //     return gson.fromJson(str, List.class);
-    // }
+    public static List<String> friendListFromJson(String str) {
+        Gson gson = new Gson();
+        return gson.fromJson(str, List.class);
+    }
 }

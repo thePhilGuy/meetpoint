@@ -1,6 +1,8 @@
 package models;
 
 import play.db.ebean.Model;
+import utility.FacebookWrapper;
+
 import javax.persistence.*;
 import java.util.*;
 
@@ -15,7 +17,7 @@ public class User extends Model {
     public String facebookId;
     public String userAccessToken;
     public boolean isLoggedIn;
-    public List<String> friends;
+    public String friends;
 
     @ManyToMany(mappedBy = "joinedUsers")
     public List<Session> joinedSessions;
@@ -41,5 +43,9 @@ public class User extends Model {
             System.out.print(s.name + "; ");
         }
         System.out.println();
+    }
+
+    public List<String> getFriends() {
+        return FacebookWrapper.friendListFromJson(friends);
     }
 }
