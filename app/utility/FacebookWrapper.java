@@ -90,6 +90,7 @@ public class FacebookWrapper {
     }
 
     public static void inviteFriend(String facebookId) {
+        System.out.println("FacebookWrapper inviteFriend called");
         //to do
     }
 }
