@@ -21,7 +21,7 @@
                 <div class="panel-heading">Unjoined Users</div>
 
                 <ul id="unjoined_sessions" class="list-group">
-                    @for(u <- s.joinedUsers) {
+                    @for(u <- s.unjoinedUsers) {
                         <li class="list-group-item">@u.name</li>
                     }
                 </ul>
@@ -31,7 +31,7 @@
                 <div class="panel-heading">Joined Users</div>
 
                 <ul id="joined_sessions"  class="list-group">
-                    @for(u <- s.unjoinedUsers) {
+                    @for(u <- s.joinedUsers) {
                         <li class="list-group-item">@u.name</li>
                     }
                 </ul>

@@ -8,6 +8,7 @@ import java.util.*;
 public class User extends Model {
 
     @Id
+    @Column(name = "id")
     public Long id;
 
     public String name;

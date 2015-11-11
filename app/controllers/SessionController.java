@@ -11,13 +11,13 @@ public class SessionController extends Controller {
         Session session = Form.form(Session.class).bindFromRequest().get();
         session.hostId = userId;
         User user = User.find.byId(userId);
-        session.joinedUsers.add(user);
+        session.joinedUsers.add(user); //only add record to session_user_joined once
         session.save();
-        user.joinedSessions.add(session);
-        System.out.println("Created session");
+        user.update();
         user.printJoinedSessions();
         user.printUnjoinedSessions();
-        //user.update();
+        session.printJoinedUsers();
+        session.printunjoinedUsers();
         return redirect("/session/" + session.id + "/" + user.id);
     }
 

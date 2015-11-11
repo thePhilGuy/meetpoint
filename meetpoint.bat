@@ -1,0 +1,1 @@
+PROJ_OPTS="-Dconfig.file=../conf/application.conf"
