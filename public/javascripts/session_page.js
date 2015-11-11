@@ -1,6 +1,5 @@
-function inviteUser(sessionId) {
-    var userId = $("input[name='userId']").val();
-    var url = window.location.origin + "/inviteUser/" + sessionId + "/" + userId;
+function inviteUser(sessionId, userName) {
+    var url = window.location.origin + "/inviteUser/" + sessionId + "/" + userName;
     $.ajax({
         url: url,
         type: "POST"

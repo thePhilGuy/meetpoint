@@ -43,7 +43,7 @@
                 <label for="friends">
                 <ul id="friends">
                 @for(f <- u.getFriends()) {
-                    <li>Invite friend ID: <a onclick="inviteUser(@s.id)">@f</a></li>
+                    <li>Invite friend ID: <a onclick="inviteUser(@s.id, f)">@f</a></li>
                 }
                 </ul>
             }
