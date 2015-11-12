@@ -29,6 +29,16 @@ public class User extends Model {
             Long.class, User.class
     );
 
+    public void updateFacebookToken(String accessToken) {
+        System.out.println("In updateFacebookToken");
+        System.out.println("accessToken: " + accessToken);
+        System.out.println("userAccessToken: " + userAccessToken);
+        if (!userAccessToken.equals(accessToken)) {
+            System.out.println("Updating facebook access token.");
+            userAccessToken = accessToken;
+        }
+    }
+
     public void printJoinedSessions() {
         System.out.println("Printing sessions in " + this.name + "'s joinedSessions:");
         for(Session s : this.joinedSessions) {

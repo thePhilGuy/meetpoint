@@ -40,16 +40,25 @@
             @if(u.friends.isEmpty) {
                 <p>You should get your friends to use meetpoint.</p>
             } else {
-                <label for="friends">
-                <ul id="friends">
-                @for(f <- u.getFriends()) {
-                    <li>Invite friend ID: <a href="javascript:inviteUser(@s.id, '@f');">@f</a></li>
-                }
-                </ul>
+                <div class="dropdown">
+                    <button class="btn btn-default dropdown-toggle" type="button" id="inviteDropdown"
+                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                     Invite a Friend
+                     <span class="caret"></span>
+                    </button>
+
+                    <ul id="friends" class="dropdown-menu" aria-labelledby="inviteDropdown">
+                        @for(f <- u.getFriends()) {
+                            <li><a href="javascript:inviteUser(@s.id, '@f');">@f</a></li>
+                        }
+                    </ul>
+                </div>
             }
 
+                <br/>
+
                 <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
-                    <input type="Submit" value="Leave Session">
+                    <button class="btn btn-default" type="Submit">Leave Session</button>
                 </form>
         </div>
 
