@@ -52,7 +52,9 @@ public class FacebookWrapper {
             instance = new FacebookWrapper();
         }
         try {
+            instance = new FacebookWrapper();
             fb.setOAuthAccessToken(new AccessToken(userToken, null));
+            System.out.println(fb.getName());
             return fb.getName();
         } catch (Exception e) {
             e.printStackTrace();
