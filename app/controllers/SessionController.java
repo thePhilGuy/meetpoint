@@ -34,7 +34,7 @@ public class SessionController extends Controller {
             return badRequest();
         }
         User u = users.get(0);
-        FacebookWrapper.inviteFriend(u.facebookId);
+        //FacebookWrapper.inviteFriend(u.facebookId);
         s.unjoinedUsers.add(u);
         s.update();
         u.update();
