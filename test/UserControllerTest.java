@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.databind.JsonNode;
+import controllers.Application;
 import org.junit.*;
 
 import play.mvc.*;
@@ -19,18 +20,11 @@ import play.twirl.api.Html;
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
-public class ControllerTest {
+public class UserControllerTest {
 
     @Test
-    public void simpleCheck() {
-        int a = 1 + 1;
-        assertThat(a).isEqualTo(2);
+    public void callUser() {
+
     }
 
-    @Test
-    public void renderTemplate() {
-        //Html html = views.html.index.render("Your new application is ready.");
-        //assertThat(contentType(html)).isEqualTo("text/html");
-        //assertThat(contentAsString(html)).contains("Your new application is ready.");
-    }
 }

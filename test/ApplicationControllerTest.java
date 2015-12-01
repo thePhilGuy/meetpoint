@@ -1,9 +1,4 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import com.fasterxml.jackson.databind.JsonNode;
+import controllers.Application;
 import org.junit.*;
 
 import play.mvc.*;
@@ -19,12 +14,17 @@ import play.twirl.api.Html;
 import static play.test.Helpers.*;
 import static org.fest.assertions.Assertions.*;
 
-public class TemplateTest {
+public class ApplicationControllerTest {
 
     @Test
-    public void renderLoginTemplate() {
-        Html html = views.html.login.render();
-        assertThat(contentAsString(html)).contains("Welcome to Meetpoint");
+    public void loginTest() {
+        Result result = Application.login();
+        assertThat(status(result)).isEqualTo(OK);
     }
 
+    @Test
+    public void indexTest() {
+        Result result = Application.index("", "");
+        assertThat(status(result)).isEqualTo(OK);
+    }
 }

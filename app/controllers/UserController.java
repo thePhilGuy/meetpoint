@@ -36,6 +36,4 @@ public class UserController extends Controller {
         return redirect("/session/" + sessionId + "/" + userId);
     }
 
-
-
 }
