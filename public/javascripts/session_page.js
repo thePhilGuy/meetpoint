@@ -5,4 +5,6 @@ function inviteUser(sessionId, userName) {
         url: url,
         type: "POST"
     });
+    // window.location.href = window.location.origin + '/session/' + sessionId + '/' + userId;
+    window.location.reload();
 }

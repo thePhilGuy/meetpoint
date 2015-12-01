@@ -23,7 +23,10 @@ public class SessionController extends Controller {
     public static Result showSession(Long sessionId, Long userId) {
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
-        return ok(session.render(s, u));
+        User h = User.find.byId(s.hostId);
+        u.friends = FacebookWrapper.getFriends(u.userAccessToken);
+        u.update();
+        return ok(session.render(s, u, h));
     }
 
     public static Result inviteUser(Long sessionId, String userName) {
@@ -34,7 +37,7 @@ public class SessionController extends Controller {
             return badRequest();
         }
         User u = users.get(0);
-        //FacebookWrapper.inviteFriend(u.facebookId);
+        // Check if User is not already in unjoinedUsers here
         s.unjoinedUsers.add(u);
         s.update();
         u.update();

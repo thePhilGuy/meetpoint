@@ -22,29 +22,9 @@ public class FacebookWrapper {
             fb = new FacebookFactory().getInstance();
             fb.setOAuthAppId(appID, appSecret);
             fb.setOAuthPermissions(permissions);
-            // fb.setOAuthAccessToken(new AccessToken(accessToken, null));
         } catch(Exception e) {
             e.printStackTrace();
         }
-    }
-
-    public static User getUserInfo() {
-        if(instance == null) {
-            instance = new FacebookWrapper();
-        }
-        try {
-            String name = fb.getName();
-            String facebookId = fb.getId();
-            ResponseList<Friendlist> list = fb.getFriendlists();
-            System.out.println(list);
-            User user = new User();
-            user.name = name;
-            user.facebookId = facebookId;
-            return user;
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
     public static String getUserName(String facebookId, String userToken) {
@@ -72,12 +52,12 @@ public class FacebookWrapper {
             ResponseList<Friend> friends = fb.getFriends();
             for (Friend f : friends) {
                 friendList.add(f.getName());
-                System.out.println("Friend: " + f.getName());
+                // System.out.println("Friend: " + f.getName());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println("In getFriends friendList = " + friendList);
+        // System.out.println("In getFriends friendList = " + friendList);
         return friendListToJson(friendList);
     }
 

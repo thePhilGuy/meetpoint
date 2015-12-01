@@ -1,4 +1,4 @@
-@(s: Session, u: User)
+@(s: Session, u: User, h: User)
 
 @links = {
         <script src="@routes.Assets.at("/javascripts/session_page.js")"></script>
@@ -13,7 +13,7 @@
         <p class="navbar-text">Signed in as <a href="@routes.UserController.showUser(u.id)" class="navbar-link">@u.name</a></p>
     </nav>
 
-    <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@u.name</strong></p>
+    <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@h.name</strong></p>
 
     <div class="row">
         <div class="col-md-5">
