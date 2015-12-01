@@ -39,22 +39,6 @@ public class User extends Model {
         }
     }
 
-    public void printJoinedSessions() {
-        System.out.println("Printing sessions in " + this.name + "'s joinedSessions:");
-        for(Session s : this.joinedSessions) {
-            System.out.print(s.name + "; ");
-        }
-        System.out.println();
-    }
-
-    public void printUnjoinedSessions() {
-        System.out.println("Printing sessions in " + this.name + "'s unjoinedSessions:");
-        for(Session s : this.unjoinedSessions) {
-            System.out.print(s.name + "; ");
-        }
-        System.out.println();
-    }
-
     public List<String> getFriends() {
         return FacebookWrapper.friendListFromJson(friends);
     }

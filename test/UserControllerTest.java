@@ -23,7 +23,7 @@ import static org.fest.assertions.Assertions.*;
 public class UserControllerTest {
 
     @Test
-    public void callUser() {
+    public void updateFacebookTokenTest() {
 
     }
 
