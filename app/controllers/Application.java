@@ -13,6 +13,8 @@ public class Application extends Controller {
     }
 
     public static Result index(String facebookId, String accessToken) {
+        System.out.println("fb Id" + facebookId);
+        System.out.println("token" + accessToken);
         List<User> users = User.find.where().eq("facebookId", facebookId).findList();
         if(users.isEmpty()) {
             return UserController.createUser(facebookId, accessToken);

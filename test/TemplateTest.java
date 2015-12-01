@@ -27,4 +27,18 @@ public class TemplateTest {
         assertThat(contentAsString(html)).contains("Welcome to Meetpoint");
     }
 
+    @Test
+    public void renderMainTemplate() {
+
+    }
+
+    @Test
+    public void renderSessionTemplate() {
+
+    }
+
+    @Test
+    public void renderUserTemplate() {
+
+    }
 }

@@ -19,14 +19,17 @@ import static org.fest.assertions.Assertions.*;
 
 public class FacebookWrapperTest {
 
+    private String facebookId = "Id863985690389295";
+    private String token = "CAAMvyLljWPMBADevYGuSieYJvN785xLlimJUCRfGsPcClbx7KvW51KVbLKXAMSZA1pwEwByCKYEjiuJJD8wbaEuQWEumFBl1lcrZB2EjdOBwEwzZAzez3fCgoEnm19k6YEt1OngoCHOivP0ZC14ooVnzpZCansjd2Wh9XoIFui6qUQqJbGUQBdo0h7XMOBzdLEfdbW7YVcQZDZD";
+
     @Test
     public void getUserNameTest() {
-
+        assertThat(FacebookWrapper.getUserName(facebookId, token)).isEqualToIgnoringCase("Di  Ruan");
     }
 
     @Test
     public void getFriendsTest() {
-
+        assertThat(FacebookWrapper.getFriends(token)).hasSize(59);
     }
 
     @Test
