@@ -8,7 +8,7 @@ import static org.fest.assertions.Assertions.assertThat;
 public class FacebookWrapperTest extends TestCase {
 
     private String facebookId = "863985690389295";
-    private String token = "CAAMvyLljWPMBAIe24Acww4Jo0ZCradz5RZBdEYWSNCe4wN7p81sFuFET7M9uyKWMwe9t7n1Wu0se13EntAeq8Hp9CmWQZBs99KKfjwhzWvj0G9fZCq6tYsCPpEUASjtmSoZCwBQ9XKoThZB9NIMbngMe2D39ymffCKIYYOqR2Jw3ZB8oXYW2nau6nj038EEMPLWb0xKPQyHyAZDZD";
+    private String token = "CAAMvyLljWPMBAFIthUrs0X1ZCGR8qVAiQn5C3Vc7v5aSLcdFXwJvVxt5aYNnlv60eMCZAuRA1bj11GoEGzNbLmZASgGNp4Wz3bMsPXUbAKqGdfNNky3SMWbZABAcbK4curZCMx8RUyZAZBVGCrwzHLtCGIc4gKNIuD8wh6ZC7kxXdHF0ySUeqptAAiNVS8RzHHz4fuaKSCmFgQZDZD";
 
     public void testGetUserName() throws Exception {
         assertThat(FacebookWrapper.getUserName(facebookId, token)).isEqualToIgnoringCase("Di  Ruan");

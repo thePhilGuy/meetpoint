@@ -2,7 +2,6 @@ package models;
 
 import play.db.ebean.Model;
 import utility.FacebookWrapper;
-
 import javax.persistence.*;
 import java.util.*;
 
@@ -21,7 +20,6 @@ public class User extends Model {
 
     public Double latitude;
     public Double longitude;
-
 
     @ManyToMany(mappedBy = "joinedUsers")
     public List<Session> joinedSessions;

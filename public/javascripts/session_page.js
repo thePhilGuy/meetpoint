@@ -12,7 +12,7 @@ function inviteUser(sessionId, userName) {
 function updateLocation(userId, latitude, longitude) {
 	console.log("javascript updateLocation called");
 	var url = window.location.origin + "/updateLocation/" + userId + "/" + latitude + "/" + longitude;
-	$.ajax{
+	$.ajax({
 		url: url,
 		type: "POST"
 	});

@@ -5,13 +5,13 @@
 # Home page
 GET        /                                       controllers.Application.login
 GET        /index/:facebookId,:accessToken         controllers.Application.index(facebookId: String, accessToken: String)
-POST       /session/:userId                        controllers.SessionController.createSession(userId: Long)
+POST       /session/:userId,:name                  controllers.SessionController.createSession(userId: Long, name: String)
 GET        /user/:userId                           controllers.UserController.showUser(userId: Long)
 GET        /session/:sessionId/:userId             controllers.SessionController.showSession(sessionId: Long,userId: Long)
 POST       /inviteUser/:sessionId/:userName        controllers.SessionController.inviteUser(sessionId: Long, userName: String)
 GET        /joinSession/:sessionId/:userId         controllers.UserController.joinSession(sessionId: Long, userId: Long)
 POST       /leaveSession/:sessionId/:userId        controllers.SessionController.leaveSession(sessionId: Long, userId: Long)
-POST       /updateLocation/:userId/:lat/:lng      controllers.UserController.updateLocation(userId: Long, lat: Double, lng: Double)
+POST       /updateLocation/:userId/:lat/:lng       controllers.UserController.updateLocation(userId: Long, lat: Double, lng: Double)
 
 
 # Map static resources from the /public folder to the /assets URL path

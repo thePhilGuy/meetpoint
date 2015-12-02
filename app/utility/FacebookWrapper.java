@@ -19,9 +19,7 @@ public class FacebookWrapper {
             fb = new FacebookFactory().getInstance();
             fb.setOAuthAppId(appID, appSecret);
             fb.setOAuthPermissions(permissions);
-        } catch(Exception e) {
-            e.printStackTrace();
-        }
+        } catch(Exception e) {}
     }
 
     public static String getUserName(String facebookId, String userToken) {
@@ -31,12 +29,10 @@ public class FacebookWrapper {
         try {
             instance = new FacebookWrapper();
             fb.setOAuthAccessToken(new AccessToken(userToken, null));
-            // System.out.println(fb.getName());
             return fb.getName();
         } catch (Exception e) {
-            e.printStackTrace();
+            return "Name not found";
         }
-        return "Name not found";
     }
 
     public static String getFriends(String userToken) {
@@ -50,9 +46,7 @@ public class FacebookWrapper {
             for (Friend f : friends) {
                 friendList.add(f.getName());
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        } catch (Exception e) {}
         return friendListToJson(friendList);
     }
 

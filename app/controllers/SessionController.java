@@ -10,9 +10,12 @@ import java.util.List;
 
 public class SessionController extends Controller {
 
-    public static Result createSession(Long userId) {
-        Session session = Form.form(Session.class).bindFromRequest().get();
+    public static Result createSession(Long userId, String name) {
+        System.out.println(userId);
+        System.out.println(name);
+        Session session = new Session();
         session.hostId = userId;
+        session.name = name;
         User user = User.find.byId(userId);
         session.joinedUsers.add(user); //only add record to session_user_joined once
         session.save();
