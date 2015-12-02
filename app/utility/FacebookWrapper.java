@@ -13,9 +13,9 @@ public class FacebookWrapper {
     private static FacebookWrapper instance;
     private static Facebook fb;
 
-    public static String appID = "896964080392435";
-    public static String appSecret = "b26ecb19307ecc7b2383a5c644c05856";
-    public static String permissions = "email";
+    private static String appID = "896964080392435";
+    private static String appSecret = "b26ecb19307ecc7b2383a5c644c05856";
+    private static String permissions = "email";
 
     private FacebookWrapper() {
         try {
@@ -52,12 +52,10 @@ public class FacebookWrapper {
             ResponseList<Friend> friends = fb.getFriends();
             for (Friend f : friends) {
                 friendList.add(f.getName());
-                // System.out.println("Friend: " + f.getName());
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        // System.out.println("In getFriends friendList = " + friendList);
         return friendListToJson(friendList);
     }
 
@@ -69,10 +67,5 @@ public class FacebookWrapper {
     public static List<String> friendListFromJson(String str) {
         Gson gson = new Gson();
         return gson.fromJson(str, List.class);
-    }
-
-    public static void inviteFriend(String facebookId) {
-        System.out.println("FacebookWrapper inviteFriend called");
-        //to do
     }
 }

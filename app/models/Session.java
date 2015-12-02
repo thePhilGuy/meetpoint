@@ -33,20 +33,4 @@ public class Session extends Model {
     public static Finder<Long,Session> find = new Finder<Long,Session>(
             Long.class, Session.class
     );
-
-    public void printJoinedUsers() {
-        System.out.println("Printing users in " + this.name + "'s joinedUsers:");
-        for(User u : this.joinedUsers) {
-            System.out.print(u.name + "; ");
-        }
-        System.out.println();
-    }
-
-    public void printunjoinedUsers() {
-        System.out.println("Printing users in " + this.name + "'s unjoinedUsers:");
-        for(User u : this.unjoinedUsers) {
-            System.out.print(u.name + "; ");
-        }
-        System.out.println();
-    }
 }
