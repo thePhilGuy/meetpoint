@@ -1,11 +1,9 @@
 package controllers;
 
 import models.*;
-import play.data.Form;
 import play.mvc.*;
 import utility.FacebookWrapper;
 import views.html.*;
-import java.util.*;
 
 public class UserController extends Controller {
 

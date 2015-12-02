@@ -3,10 +3,7 @@ package utility;
 import com.google.gson.Gson;
 import facebook4j.*;
 import facebook4j.auth.AccessToken;
-import models.User;
 import java.util.*;
-import models.*;
-import play.db.ebean.Model;
 
 public class FacebookWrapper {
 
