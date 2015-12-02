@@ -19,6 +19,10 @@ public class User extends Model {
     public boolean isLoggedIn;
     public String friends;
 
+    public Double latitude;
+    public Double longitude;
+
+
     @ManyToMany(mappedBy = "joinedUsers")
     public List<Session> joinedSessions;
 

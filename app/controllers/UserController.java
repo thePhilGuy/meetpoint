@@ -36,6 +36,14 @@ public class UserController extends Controller {
         return redirect("/session/" + sessionId + "/" + userId);
     }
 
+    public static Result updateLocation(Long userId, double lat, double lng) {
+        User u = User.find.byId(userId);
+        u.latitude = lat;
+        u.longitude = lng;
+        u.update();
+        return ok();
+    }
+
 
 
 }

@@ -17,6 +17,8 @@ create table user (
   user_access_token         varchar(255),
   is_logged_in              boolean,
   friends                   varchar(255),
+  latitude                  double,
+  longitude                 double,
   constraint pk_user primary key (id))
 ;
 

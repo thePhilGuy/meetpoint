@@ -8,3 +8,12 @@ function inviteUser(sessionId, userName) {
     // window.location.href = window.location.origin + '/session/' + sessionId + '/' + userId;
     window.location.reload();
 }
+
+function updateLocation(userId, latitude, longitude) {
+	console.log("javascript updateLocation called");
+	var url = window.location.origin + "/updateLocation/" + userId + "/" + latitude + "/" + longitude;
+	$.ajax{
+		url: url,
+		type: "POST"
+	});
+}
