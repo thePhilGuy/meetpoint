@@ -5,7 +5,7 @@
 # Home page
 GET        /                                       controllers.Application.login
 GET        /index/:facebookId,:accessToken         controllers.Application.index(facebookId: String, accessToken: String)
-POST       /session/:userId,:name                  controllers.SessionController.createSession(userId: Long, name: String)
+GET        /newSession/:userId,:name               controllers.SessionController.createSession(userId: Long, name: String)
 GET        /user/:userId                           controllers.UserController.showUser(userId: Long)
 GET        /session/:sessionId/:userId             controllers.SessionController.showSession(sessionId: Long,userId: Long)
 POST       /inviteUser/:sessionId/:userName        controllers.SessionController.inviteUser(sessionId: Long, userName: String)

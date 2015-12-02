@@ -40,11 +40,9 @@
 		</div>
 	</div>
 
-	<form class="form-inline" onsubmit="javascript:createSession(@u.id)">
-		<div class="form-group">
-			<label class="sr-only" for="name">Create a new Session</label>
-			<input name="name" id="sessionName" type="text" class="form-control" placeholder="Session Name">
-		</div>
-		<button type="submit" class="btn btn-default">Create Session</button>
-	</form>
+	<div class="form-group">
+		<label for="name">Create a new Session</label><br>
+		<input name="name" id="sessionName" type="text" placeholder="Session Name">
+		<button type="submit" onclick="javascript:createSession(@u.id)" class="btn btn-default">Create Session</button>
+	</div>
 }

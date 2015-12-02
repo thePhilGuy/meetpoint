@@ -10,10 +10,6 @@ function showSession(sessionId, userId) {
 
 function createSession(userId) {
     var name = $("#sessionName").val();
-    var url = window.location.origin + "/session/" + userId + "," + name;
-    console.log(url);
-    $.ajax({
-        url: url,
-        type: "POST"
-    });
+    var url = window.location.origin + "/newSession/" + userId + "," + name;
+    window.location.href = url;
 }

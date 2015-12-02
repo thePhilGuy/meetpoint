@@ -17,7 +17,7 @@ public class SessionController extends Controller {
         session.hostId = userId;
         session.name = name;
         User user = User.find.byId(userId);
-        session.joinedUsers.add(user); //only add record to session_user_joined once
+        session.joinedUsers.add(user);
         session.save();
         user.update();
         return redirect("/session/" + session.id + "/" + user.id);
@@ -40,8 +40,9 @@ public class SessionController extends Controller {
             return badRequest();
         }
         User u = users.get(0);
-        // Check if User is not already in unjoinedUsers here
-        s.unjoinedUsers.add(u);
+        if(!s.unjoinedUsers.contains(u) && !s.joinedUsers.contains(u)) {
+            s.unjoinedUsers.add(u);
+        }
         s.update();
         u.update();
         return ok();
