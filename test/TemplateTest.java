@@ -44,7 +44,25 @@ public class TemplateTest {
     }
 
     //@Test
-    public void renderSessionTemplate() {
+    public void renderSessionTemplateNoUsers() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Session s = new Session();
+                s.id = 1L;
+                s.name = "TestSession";
+                s.hostId = 101L;
+                User host = new User();
+                host.name = "host user";
+                host.id = 101L;
+                host.friends = "";
+                Html html = views.html.session.render(s, host, host);
+                assertThat(contentAsString(html)).contains("You are viewing session <strong>" + s.name + "</strong> hosted by <strong>" + host.name + "</strong>");
+                assertThat(contentAsString(html)).contains("<p>You should get your friends to use meetpoint.</p>");
+            }
+        });
+    }
+
+    public void renderSessionTemplateMultipleUsers() {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Session s = new Session();
@@ -79,7 +97,7 @@ public class TemplateTest {
     }
 
     //@Test
-    public void renderUserTemplate() {
+    public void renderUserTemplateMultipleSessions() {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 User u = new User();
@@ -98,6 +116,19 @@ public class TemplateTest {
                 assertThat(contentAsString(html)).contains("Signed in as <a href=\"/user/" + u.id + "\" class=\"navbar-link\">" + u.name + "</a></p>");
                 assertThat(contentAsString(html)).contains("<a href=\"javascript:showSession(" + sJoined.id + ", " + u.id + ")\" class=\"list-group-item\">" + sJoined.name + "</a>");
                 assertThat(contentAsString(html)).contains("<a class=\"list-group-item\" href=\"javascript:joinSession(" + sUnjoined.id + ", " + u.id + ");\">" + sUnjoined.name + "</a>");
+            }
+        });
+    }
+
+    public void renderUserTemplateNoSessions() {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                User u = new User();
+                u.id = 1L;
+                u.name = "test user";
+                u.friends = "";
+                Html html = views.html.user.render(u);
+                assertThat(contentAsString(html)).contains("Signed in as <a href=\"/user/" + u.id + "\" class=\"navbar-link\">" + u.name + "</a></p>");
             }
         });
     }
