@@ -1,17 +1,28 @@
 @(s: Session, u: User, h: User)
 
 @links = {
-        <script src="@routes.Assets.at("/javascripts/session_page.js")"></script>
         <script>
             var userId = @u.id;
             var joinedLocations = [];
+            // test joinedLocations
+            joinedLocations.push({
+                lat: @h.latitude + 0.5,
+                lng: @h.longitude + 0.5
+            });
+            // test joinedLocations
+            joinedLocations.push({
+                lat: @h.latitude + 1.1,
+                lng: @h.longitude - 4.7
+            });
+
             @for(j <- s.joinedUsers) {
-                joinedLocations.push({
-                    lat: @j.latitude,
-                    lng: @j.longitude
-                });
+            joinedLocations.push({
+                lat: @j.latitude,
+                lng: @j.longitude
+            });
             }
         </script>
+        <script src="@routes.Assets.at("/javascripts/session_page.js")"></script>
 }
 
 @main(title = "- " + s.name)(links) {

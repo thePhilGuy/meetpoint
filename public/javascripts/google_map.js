@@ -17,21 +17,45 @@ function initSessionMap() {
 			map.setCenter(pos);
 
 			// Place a marker for the user
-		    var marker = new google.maps.Marker({
+		    var markers = [];
+		    markers.push(new google.maps.Marker({
 		      position: pos,
 		      map: map
-		    });
+		    }));
 
 		    // Update user current position
 		    updateLocation(userId, pos.lat, pos.lng);
 
 		    // Place a marker at the location of each other joined user
 		    joinedLocations.forEach(function(location) {
-		    	var marker = new google.maps.Marker({
+		    	markers.push(new google.maps.Marker({
 		    		position: location,
 		    		map: map
-		    	});
+		    	}));
 		    });
+
+		    // Place a marker at the average location
+		    var sumLocations = joinedLocations.reduce(function (a,b) {
+		    	return {lat: a.lat + b.lat, lng: a.lng + b.lng};
+		    });
+		    var avgLocation = {
+		    	lat: sumLocations.lat / joinedLocations.length,
+		    	lng: sumLocations.lng / joinedLocations.length
+		    };
+		    var centerMarker = new google.maps.Marker({
+		    	position: avgLocation,
+		    	map: map,
+		    	icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
+		    });
+
+		    // Actually set map center to midpoint
+		    map.setCenter(avgLocation);
+
+		    // Fit all markers on map
+		    var bounds = new google.maps.LatLngBounds();
+		    for(i = 0; i < markers.length; i++) bounds.extend(markers[i].getPosition());
+
+		    map.fitBounds(bounds);
 
 		});
 	} else {

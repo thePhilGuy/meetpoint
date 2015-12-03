@@ -13,3 +13,21 @@ function createSession(userId) {
     var url = window.location.origin + "/newSession/" + userId + "," + name;
     window.location.href = url;
 }
+
+function updateLocation(userId) {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+			//Current User position
+			var pos = {
+				lat: position.coords.latitude,
+				lng: position.coords.longitude
+			};
+			//Post to server
+			var url = window.location.origin + "/updateLocation/" + userId + "/" + pos.lat + "/" + pos.lng;
+			$.ajax({
+				url: url,
+				type: "POST"
+			});
+		});
+	}
+}
