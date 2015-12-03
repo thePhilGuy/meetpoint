@@ -6,17 +6,20 @@
             var joinedLocations = [];
             // test joinedLocations
             joinedLocations.push({
-                lat: @h.latitude + 0.5,
-                lng: @h.longitude + 0.5
+                name: "Bob Name",
+                lat: @h.latitude + 0.09,
+                lng: @h.longitude + 0.22
             });
             // test joinedLocations
             joinedLocations.push({
-                lat: @h.latitude + 1.1,
-                lng: @h.longitude - 4.7
+                name: "Alice Name",
+                lat: @h.latitude + 0.11,
+                lng: @h.longitude - 0.47
             });
 
             @for(j <- s.joinedUsers) {
             joinedLocations.push({
+                name: '@j.name',
                 lat: @j.latitude,
                 lng: @j.longitude
             });

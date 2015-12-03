@@ -18,20 +18,43 @@ function initSessionMap() {
 
 			// Place a marker for the user
 		    var markers = [];
-		    markers.push(new google.maps.Marker({
+		    var userMarker = new google.maps.Marker({
 		      position: pos,
 		      map: map
-		    }));
+		    });
+
+		    // Attach its info window
+		    var userInfo = new google.maps.InfoWindow({
+		    	content: "Me"
+		    });
+		    userMarker.addListener('click', function() {
+		    	userInfo.open(map, userMarker);
+		    })
+		    markers.push(userMarker);
 
 		    // Update user current position
 		    updateLocation(userId, pos.lat, pos.lng);
 
 		    // Place a marker at the location of each other joined user
 		    joinedLocations.forEach(function(location) {
-		    	markers.push(new google.maps.Marker({
-		    		position: location,
+		    	var locationPos = {
+		    		lat: location.lat,
+		    		lng: location.lng
+		    	};
+
+		    	var locationMarker = new google.maps.Marker({
+		    		position: locationPos,
 		    		map: map
-		    	}));
+		    	});
+		    	
+		    	var locationInfo = new google.maps.InfoWindow({
+			    	content: location.name
+			    });
+			    locationMarker.addListener('click', function() {
+			    	locationInfo.open(map, locationMarker);
+			    });
+
+		    	markers.push(locationMarker);
 		    });
 
 		    // Place a marker at the average location
