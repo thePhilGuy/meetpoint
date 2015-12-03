@@ -9,7 +9,7 @@ public class RouterTest {
     public void simpleCheck() {
         running(fakeApplication(), new Runnable() {
             public void run() {
-                Result result = route(fakeRequest(GET, "/xx/Kiki/hj/gh/gh/gh"));
+                Result result = route(fakeRequest(GET, "/user/Kiki/hj/gh/gh/gh"));
                 assertThat(result).isNull();
             }
         });

@@ -14,7 +14,7 @@ import static play.test.Helpers.status;
 public class UserControllerTest extends TestCase {
 
     private String facebookId = "863985690389295";
-    private String token = "CAAMvyLljWPMBABRGCf0JVp5vZAo9FtOr5rMaVZAAyGEjxD6FMn8FuFMdzaPL2AhLZBr1xj2fDZAarhii0btETqGRmC74WuYNJpF1CmmDNnJD1jCNwZC9sBXBbdHQIOK8ptvuXHR6ZAASCd5vdMvAad5PSyea0FMJd6YHlZBJEKmZCJyq4lV8UXR0gYw9tM5byjUlZC4csWHZAfwgZDZD";
+    private String token = "CAAMvyLljWPMBAADypzPHPs71IRShx9L1U3xgaH0omnKUgU7fuhmIbp6A2gI5nSvrdvggx5eDN2Ded5pj5Ip1S0ZAz5gUZCkCQyHZBc4cV2Mmk5mYDLvjh6mpANUuqCrSkjrIvwEjU6kQ6BSuGsWzAVitG5wBOSqoRrTH1b53mUB7tFRv2g1Klpsg0P7ADsprjVvhJUh2Sgq39oOdRK4";
 
     public void testCreateUser() {
         running(fakeApplication(), new Runnable() {
