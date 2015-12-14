@@ -1,31 +1,12 @@
 @(s: Session, u: User, h: User)
 
 @links = {
+
         <script>
             var userId = @u.id;
-            var joinedLocations = [];
-            // test joinedLocations
-            joinedLocations.push({
-                name: "Bob Name",
-                lat: @h.latitude + 0.09,
-                lng: @h.longitude + 0.22
-            });
-            // test joinedLocations
-            joinedLocations.push({
-                name: "Alice Name",
-                lat: @h.latitude + 0.11,
-                lng: @h.longitude - 0.47
-            });
-
-            @for(j <- s.joinedUsers) {
-            joinedLocations.push({
-                name: '@j.name',
-                lat: @j.latitude,
-                lng: @j.longitude
-            });
-            }
+            var sessionId = @s.id;
+            var meetType = '@s.meetType';
         </script>
-        <script src="@routes.Assets.at("/javascripts/session_page.js")"></script>
 }
 
 @main(title = "- " + s.name)(links) {
@@ -38,6 +19,19 @@
     </nav>
 
     <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@h.name</strong></p>
+
+    @if(u.name.equals(h.name)) {
+        <div>
+            <label for="locationType">MeetPoint Type:</label>
+            <select id="locationType" onchange="changeMeetType(@s.id)">
+                <option value="default"></option>
+                <option value="restaurant">restaurant</option>
+                <option value="bar">bar</option>
+                <option value="cafe">cafe</option>
+            </select>
+        </div>
+    }
+    <br>
 
     <div class="row">
         <div class="col-md-5">
@@ -79,20 +73,20 @@
                 </div>
             }
 
-                <br/>
+            <br/>
 
-                <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
-                    <button class="btn btn-default" type="Submit">Leave Session</button>
-                </form>
+            <form action="@routes.SessionController.leaveSession(s.id, u.id)" method="post">
+                <button class="btn btn-default" type="Submit">Leave Session</button>
+            </form>
         </div>
 
         <div class="col-md-7">
             <div class="panel panel-default">
                 <div id="map" style="width: 100%; height: 60vh"></div>
                 <script src="@routes.Assets.at("javascripts/jquery-1.11.3.min.js")"></script>
+                <script src="@routes.Assets.at("javascripts/session_page.js")"></script>
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmTfTysq82Yq56eFrIw9i4jQ7c4HnJw0&libraries=places&callback=initSessionMap" async defer></script>
                 <script src="@routes.Assets.at("javascripts/google_map.js")"></script>
-                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBYmTfTysq82Yq56eFrIw9i4jQ7c4HnJw0&callback=initSessionMap" async defer>
-                </script>
             </div>
         </div>
     </div>

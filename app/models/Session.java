@@ -13,6 +13,7 @@ public class Session extends Model {
 
     public String name;
     public Long hostId;
+    public String meetType;
 
     @ManyToMany
     @JoinTable(

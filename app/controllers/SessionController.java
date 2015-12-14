@@ -1,14 +1,27 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.google.gson.JsonArray;
 import models.*;
-import play.data.Form;
+import play.api.libs.json.JsObject;
+import play.libs.Json;
 import play.mvc.*;
 import utility.FacebookWrapper;
 import views.html.session;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SessionController extends Controller {
+
+    static class Position {
+        public double lat;
+        public double lng;
+        public Position(double lat, double lng) {
+            this.lat = lat;
+            this.lng = lng;
+        }
+    }
 
     public static Result createSession(Long userId, String name) {
         System.out.println(userId);
@@ -16,6 +29,7 @@ public class SessionController extends Controller {
         Session session = new Session();
         session.hostId = userId;
         session.name = name;
+        session.meetType = "";
         User user = User.find.byId(userId);
         session.joinedUsers.add(user);
         session.save();
@@ -46,6 +60,25 @@ public class SessionController extends Controller {
         s.update();
         u.update();
         return ok();
+    }
+
+    public static Result updateMeetType(Long sessionId, String meetType) {
+        Session s = Session.find.byId(sessionId);
+        s.meetType = meetType;
+        s.update();
+        return ok();
+    }
+
+    public static Result getMeetPoints(Long sessionId) {
+        Session s = Session.find.byId(sessionId);
+        ObjectNode result = Json.newObject();
+        List<Position> list = new ArrayList<Position>();
+        for(User u : s.joinedUsers) {
+            list.add(new Position(u.latitude, u.longitude));
+        }
+        result.put("jointList", Json.toJson(list));
+        result.put("meetType", s.meetType);
+        return ok(result);
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {

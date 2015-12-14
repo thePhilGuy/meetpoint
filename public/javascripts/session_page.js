@@ -10,11 +10,25 @@ function inviteUser(sessionId, userName) {
 }
 
 function updateLocation(userId, latitude, longitude) {
-	console.log("javascript updateLocation called");
-    console.log("latitude: " + latitude + ", longitude: " + longitude);
+    console.log("userId: " + userId +  ", latitude: " + latitude + ", longitude: " + longitude);
+    latitude += Math.random()*0.005;
+    longitude += Math.random()*0.005;
 	var url = window.location.origin + "/updateLocation/" + userId + "/" + latitude + "/" + longitude;
 	$.ajax({
 		url: url,
 		type: "POST"
 	});
 }
+
+function changeMeetType(sessionId) {
+    var type = $("#locationType").val();
+    var url = window.location.origin + "/updateMeetType/" + sessionId + "/" + type;
+    $.ajax({
+        url: url,
+        type: "POST"
+    });
+}
+
+$( document ).ready(function() {
+    $("#locationType").val(meetType);
+});
