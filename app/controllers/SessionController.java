@@ -24,6 +24,7 @@ public class SessionController extends Controller {
     }
 
     public static Result createSession(Long userId, String name) {
+        if(!session("user_id").equals(userId.toString())) return forbidden();
         System.out.println(userId);
         System.out.println(name);
         List<Session> sessions = Session.find.where().eq("name", name).findList();
@@ -42,6 +43,7 @@ public class SessionController extends Controller {
     }
 
     public static Result showSession(Long sessionId, Long userId) {
+        if(!session("user_id").equals(userId.toString())) return forbidden();
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         User h = User.find.byId(s.hostId);
@@ -53,6 +55,7 @@ public class SessionController extends Controller {
     public static Result inviteUser(Long sessionId, String userName) {
         System.out.println("Inviting user " + userName + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
+        if(!session("user_id").equals(s.hostId.toString())) return forbidden();
         List<User> users = User.find.where().eq("name", userName).findList();
         if(users.size() == 0) {
             return badRequest();
@@ -68,6 +71,7 @@ public class SessionController extends Controller {
 
     public static Result updateMeetType(Long sessionId, String meetType) {
         Session s = Session.find.byId(sessionId);
+        if(!session("user_id").equals(s.hostId.toString())) return forbidden();
         s.meetType = meetType;
         s.update();
         return ok();
@@ -86,6 +90,7 @@ public class SessionController extends Controller {
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {
+        if(!session("user_id").equals(userId.toString())) return forbidden();
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
