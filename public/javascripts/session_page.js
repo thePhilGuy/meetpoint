@@ -53,6 +53,6 @@ function getUserList(sessionId) {
                 $("#unjoined_sessions").append('<li class="list-group-item">' + unjoinedUsers[i] + '</li>');
             }
         }
-        setTimeout(function() { getUserList(sessionId); }, 3000);
+        setTimeout(function() { getUserList(sessionId); }, 10000);
     });
 }
