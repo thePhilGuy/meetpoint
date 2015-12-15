@@ -22,7 +22,7 @@
 
     <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@h.name</strong></p>
 
-    @if(u.name.equals(h.name)) {
+    @if(u.id.equals(h.id)) {
         <div class="form-group" id="meetTypeDropdown">
             <label for="locationType">MeetPoint Type:</label>
             <select id="locationType" class="form-control" onchange="changeMeetType(@s.id)">
@@ -58,22 +58,24 @@
                 </ul>
             </div>
 
-            @if(u.friends.isEmpty) {
-                <p>You should get your friends to use meetpoint.</p>
-            } else {
-                <div class="dropdown">
-                    <button class="btn btn-default dropdown-toggle" type="button" id="inviteDropdown"
-                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                     Invite a Friend
-                     <span class="caret"></span>
-                    </button>
+            @if(u.id.equals(h.id)) {
+                @if(u.friends.isEmpty) {
+                    <p>You should get your friends to use meetpoint.</p>
+                } else {
+                    <div class="dropdown">
+                        <button class="btn btn-default dropdown-toggle" type="button" id="inviteDropdown"
+                         data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                         Invite a Friend
+                         <span class="caret"></span>
+                        </button>
 
-                    <ul id="friends" class="dropdown-menu" aria-labelledby="inviteDropdown">
-                        @for(f <- u.getFriends()) {
-                            <li><a href="javascript:inviteUser(@s.id, '@f');">@f</a></li>
-                        }
-                    </ul>
-                </div>
+                        <ul id="friends" class="dropdown-menu" aria-labelledby="inviteDropdown">
+                            @for(f <- u.getFriends()) {
+                                <li><a href="javascript:inviteUser(@s.id, '@f');">@f</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
             }
 
             <br/>
