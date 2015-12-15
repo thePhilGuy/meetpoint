@@ -13,7 +13,7 @@
 
     <nav class="navbar navbar-default">
         <div class="navbar-header">
-            <a class="navbar-brand" href="">Meetpoint</a>
+            <a class="navbar-brand" href="@routes.UserController.showUser(u.id)">Meetpoint</a>
         </div>
         <p class="navbar-text">Signed in as <a href="@routes.UserController.showUser(u.id)" class="navbar-link">@u.name</a></p>
     </nav>
@@ -26,8 +26,8 @@
             <select id="locationType" onchange="changeMeetType(@s.id)">
                 <option value="default"></option>
                 <option value="restaurant">restaurant</option>
-                <option value="bar">bar</option>
                 <option value="cafe">cafe</option>
+                <option value="movie_theater">theater</option>
             </select>
         </div>
     }
@@ -90,7 +90,4 @@
             </div>
         </div>
     </div>
-
-
 }
-

@@ -26,6 +26,10 @@ public class SessionController extends Controller {
     public static Result createSession(Long userId, String name) {
         System.out.println(userId);
         System.out.println(name);
+        List<Session> sessions = Session.find.where().eq("name", name).findList();
+        if(sessions.size() > 0) {
+            return status(409, "Session already existed");
+        }
         Session session = new Session();
         session.hostId = userId;
         session.name = name;
@@ -50,7 +54,7 @@ public class SessionController extends Controller {
         System.out.println("Inviting user " + userName + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
         List<User> users = User.find.where().eq("name", userName).findList();
-        if(users.isEmpty()) {
+        if(users.size() == 0) {
             return badRequest();
         }
         User u = users.get(0);
@@ -86,8 +90,8 @@ public class SessionController extends Controller {
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
         s.unjoinedUsers.add(u);
-        s.update();
         u.update();
+        s.update();
         return redirect("/user/" + u.id);
     }
 

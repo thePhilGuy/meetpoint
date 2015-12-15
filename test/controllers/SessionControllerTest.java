@@ -5,6 +5,7 @@ import models.Session;
 import models.User;
 import play.mvc.Result;
 import static org.fest.assertions.Assertions.assertThat;
+import static play.mvc.Http.Status.BAD_REQUEST;
 import static play.test.Helpers.fakeApplication;
 import static play.test.Helpers.running;
 import static play.test.Helpers.status;
@@ -28,6 +29,7 @@ public class SessionControllerTest extends TestCase {
         running(fakeApplication(), new Runnable() {
             public void run() {
                 User user = new User();
+                user.name = "tester";
                 user.save();
                 Session session = new Session();
                 session.joinedUsers.add(user);
@@ -47,8 +49,10 @@ public class SessionControllerTest extends TestCase {
                 User user = new User();
                 user.name = "Di";
                 user.save();
-                Result result = SessionController.inviteUser(1L, "Di");
-                assertThat(status(result)).isEqualTo(OK);
+                Result result1 = SessionController.inviteUser(1L, "Di");
+                assertThat(status(result1)).isEqualTo(OK);
+                Result result2 = SessionController.inviteUser(1L, "Nobody");
+                assertThat(status(result2)).isEqualTo(BAD_REQUEST);
             }
         });
     }
@@ -64,6 +68,34 @@ public class SessionControllerTest extends TestCase {
                 session.save();
                 Result result = SessionController.leaveSession(1L, 1L);
                 assertThat(status(result)).isEqualTo(SEE_OTHER);
+            }
+        });
+    }
+
+    public void testUpdateMeetType() throws Exception {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Session session = new Session();
+                session.save();
+                Result result = SessionController.updateMeetType(session.id, "bar");
+                assertThat(status(result)).isEqualTo(OK);
+            }
+        });
+    }
+
+    public void testGetMeetPoints() throws Exception {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                SessionController.Position p = new SessionController.Position(42.0, 42.0);
+                Session session = new Session();
+                User user = new User();
+                user.latitude = 41.0;
+                user.longitude = 41.0;
+                user.save();
+                session.joinedUsers.add(user);
+                session.save();
+                Result result = SessionController.getMeetPoints(1L);
+                assertThat(status(result)).isEqualTo(OK);
             }
         });
     }

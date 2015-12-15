@@ -22,7 +22,7 @@ public class FacebookWrapper {
         } catch(Exception e) {}
     }
 
-    public static String getUserName(String facebookId, String userToken) {
+    public static String getUserName(String userToken) {
         if(instance == null) {
             instance = new FacebookWrapper();
         }

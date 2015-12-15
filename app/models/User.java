@@ -32,11 +32,9 @@ public class User extends Model {
     );
 
     public void updateFacebookToken(String accessToken) {
-        System.out.println("In updateFacebookToken");
         System.out.println("accessToken: " + accessToken);
         System.out.println("userAccessToken: " + userAccessToken);
         if (!userAccessToken.equals(accessToken)) {
-            System.out.println("Updating facebook access token.");
             userAccessToken = accessToken;
         }
     }

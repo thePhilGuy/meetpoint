@@ -16,6 +16,7 @@ public class SessionModelTest extends TestCase {
                 Session session = new Session();
                 session.name = "";
                 session.hostId = 1L;
+                session.meetType = "bar";
                 session.joinedUsers = new ArrayList<User>();
                 session.unjoinedUsers = new ArrayList<User>();
                 session.save();

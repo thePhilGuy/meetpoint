@@ -10,7 +10,7 @@ public class UserController extends Controller {
     public static Result createUser(String facebookId, String accessToken) {
         User user = new User();
         user.facebookId = facebookId;
-        user.name = FacebookWrapper.getUserName(facebookId, accessToken);
+        user.name = FacebookWrapper.getUserName(accessToken);
         user.userAccessToken = accessToken;
         user.isLoggedIn = true;
         user.friends = FacebookWrapper.getFriends(accessToken);
@@ -20,7 +20,7 @@ public class UserController extends Controller {
 
     public static Result showUser(Long userId) {
         User u = User.find.byId(userId);
-        FacebookWrapper.getUserName(u.facebookId, u.userAccessToken);
+        FacebookWrapper.getUserName(u.userAccessToken);
         return ok(user.render(u));
     }
 

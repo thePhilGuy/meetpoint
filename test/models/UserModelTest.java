@@ -12,6 +12,10 @@ public class UserModelTest extends TestCase {
             public void run() {
                 User user = new User();
                 user.facebookId = "";
+                user.isLoggedIn = true;
+                user.latitude = 42.1;
+                user.longitude = 42.1;
+                user.friends = "";
                 user.getFriends();
                 user.userAccessToken = "1";
                 user.save();

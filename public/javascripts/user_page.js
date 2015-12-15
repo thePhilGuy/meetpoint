@@ -10,6 +10,10 @@ function showSession(sessionId, userId) {
 
 function createSession(userId) {
     var name = $("#sessionName").val();
+	if(!name) {
+		alert("Session name cannot be empty!");
+		return;
+	}
     var url = window.location.origin + "/newSession/" + userId + "," + name;
     window.location.href = url;
 }

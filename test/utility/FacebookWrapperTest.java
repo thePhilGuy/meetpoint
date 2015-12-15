@@ -7,15 +7,14 @@ import static org.fest.assertions.Assertions.assertThat;
 
 public class FacebookWrapperTest extends TestCase {
 
-    private String facebookId = "863985690389295";
-    private String token = "CAAMvyLljWPMBAJkfA5wLvH4Wwt3Kb187lHUScKsCefV5NuQ8d1MSeJKpzzIknhLMsXJWaQIl8qS0Ve8JzWenWT40iW0y70u9kXTG1rqnaJOUmtZA6WhbUcnZAuLL26PNOB9kjxQAiqis2SAtWOYE3W5j4mhjhwmoqYNBOcaOh0aYDpHMANdRes6HOIu9XPSfRbptYZCRAZDZD";
+    private String token = "CAAMvyLljWPMBAA4725tqRsSx1iixN1rZAMmnl4MMGDQQZAbOCLtIoUQY0SUrvSlXyedNglc5GVeA9BghgGR3rf8xpVi1D2zsZCuRsrMZAhl7FboDer5bfF8SbW03jXcTFQGDTBD1nmDPrwXY9vkGqM96h8ZByGEjKZBcR8HcJ3JaGTLsb05xFrDYisIsE1q8lguTyeTbgz0wZDZD";
 
     public void testGetUserName() throws Exception {
-        assertThat(FacebookWrapper.getUserName(facebookId, token)).isEqualToIgnoringCase("Di  Ruan");
+        assertThat(FacebookWrapper.getUserName(token)).isEqualToIgnoringCase("Di  Ruan");
     }
 
     public void testGetFriends() throws Exception {
-        assertThat(FacebookWrapper.getFriends(token)).hasSize(59);
+        assertThat(FacebookWrapper.getFriends(token)).hasSize(78);
     }
 
     public void testFriendListToJson() throws Exception {
