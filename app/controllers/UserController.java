@@ -5,6 +5,8 @@ import play.mvc.*;
 import utility.FacebookWrapper;
 import views.html.*;
 
+import java.util.List;
+
 public class UserController extends Controller {
 
     public static Result createUser(String facebookId, String accessToken) {
@@ -19,7 +21,11 @@ public class UserController extends Controller {
     }
 
     public static Result showUser(Long userId) {
-        User u = User.find.byId(userId);
+        List<User> users = User.find.where().eq("id", userId).findList();
+        if (users.size() == 0) {
+            return badRequest();
+        }
+        User u = users.get(0);
         FacebookWrapper.getUserName(u.userAccessToken);
         return ok(user.render(u));
     }
