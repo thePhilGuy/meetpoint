@@ -97,7 +97,7 @@ function drawMarkers() {
 				service.nearbySearch(request, showPlaces);
 			}
 		}
-		setTimeout(function() { drawMarkers; }, 10000);
+		setTimeout(function() { drawMarkers(); }, 10000);
 	});
 }
 
