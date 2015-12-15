@@ -86,8 +86,8 @@ function drawMarkers() {
 				bounds.extend(markers[i].getPosition());
 			}
 			map.fitBounds(bounds);
-
-			if(type != 'default') {
+			console.log(type);
+			if(type && type != 'default') {
 				var request = {
 					location: avgLocation,
 					radius: 300,
