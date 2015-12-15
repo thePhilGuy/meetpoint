@@ -3,3 +3,8 @@
     margin-right: auto;
     margin-left: auto;
 }
+
+#meetTypeDropdown {
+    width: 50%;
+    /*padding: 3%;*/
+}

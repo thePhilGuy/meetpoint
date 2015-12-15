@@ -21,13 +21,13 @@
     <p class="lead">You are viewing session <strong>@s.name</strong> hosted by <strong>@h.name</strong></p>
 
     @if(u.name.equals(h.name)) {
-        <div>
+        <div class="form-group" id="meetTypeDropdown">
             <label for="locationType">MeetPoint Type:</label>
-            <select id="locationType" onchange="changeMeetType(@s.id)">
+            <select id="locationType" class="form-control" onchange="changeMeetType(@s.id)">
                 <option value="default"></option>
-                <option value="restaurant">restaurant</option>
-                <option value="cafe">cafe</option>
-                <option value="movie_theater">theater</option>
+                <option value="restaurant">Restaurant</option>
+                <option value="cafe">Cafe</option>
+                <option value="movie_theater">Theater</option>
             </select>
         </div>
     }
