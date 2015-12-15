@@ -31,4 +31,30 @@ function changeMeetType(sessionId) {
 
 $( document ).ready(function() {
     $("#locationType").val(meetType);
+    getUserList(sessionId);
 });
+
+
+function getUserList(sessionId) {
+    var url = window.location.origin + "/getCurrentUsers/" + sessionId;
+    $.get( url, function( data ) {
+        var joinedUsers = data.joinedUsersList;
+        var unjoinedUsers = data.unjoinedUsersList;
+        if(JSON.stringify(joinedUsers) != JSON.stringify(displayedJoinedUsers) ) {
+            displayedJoinedUsers = joinedUsers;
+            $("#joined_sessions").empty();
+            for(var i=0; i<displayedJoinedUsers.length; i++) {
+                $("#joined_sessions").append('<li>' + joinedUsers[i] + '</li>');
+            }
+        }
+        if(JSON.stringify(unjoinedUsers) != JSON.stringify(displayedUnjoinedUsers)) {
+            displayedUnjoinedUsers = unjoinedUsers;
+            $("#unjoined_sessions").empty();
+            for(var i=0; i<displayedUnjoinedUsers.length; i++) {
+                $("#unjoined_sessions").append('<li>' + unjoinedUsers[i] + '</li>');
+            }
+        }
+
+    });
+    setTimeout(getUserList(sessionId), 3000);
+}

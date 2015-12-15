@@ -95,4 +95,19 @@ public class SessionController extends Controller {
         return redirect("/user/" + u.id);
     }
 
+    public static Result getCurrentUsers(Long sessionId) {
+        Session s = Session.find.byId(sessionId);
+        ObjectNode result = Json.newObject();
+        List<String> joinedUserNames = new ArrayList<String>();
+        List<String> unjoinedUserNames = new ArrayList<String>();
+        for(User u : s.joinedUsers) {
+            joinedUserNames.add(u.name);
+        }
+        for(User u: s.unjoinedUsers) {
+            unjoinedUserNames.add(u.name);
+        }
+        result.put("joinedUsersList", Json.toJson(joinedUserNames));
+        result.put("unjoinedUsersList", Json.toJson(unjoinedUserNames));
+        return ok(result);
+    }
 }

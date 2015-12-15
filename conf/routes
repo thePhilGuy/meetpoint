@@ -14,6 +14,7 @@ GET        /meetPoints/:sessionId                  controllers.SessionController
 POST       /leaveSession/:sessionId/:userId        controllers.SessionController.leaveSession(sessionId: Long, userId: Long)
 POST       /updateLocation/:userId/:lat/:lng       controllers.UserController.updateLocation(userId: Long, lat: Double, lng: Double)
 POST       /updateMeetType/:sessionId/:meetType    controllers.SessionController.updateMeetType(sessionId: Long, meetType: String)
+GET        /getCurrentUsers/:sessionId             controllers.SessionController.getCurrentUsers(sessionId: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET        /assets/*file                           controllers.Assets.at(path="/public", file)
