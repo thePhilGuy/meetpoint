@@ -10,7 +10,6 @@ function inviteUser(sessionId, userName) {
 }
 
 function updateLocation(userId, latitude, longitude) {
-    console.log("userId: " + userId +  ", latitude: " + latitude + ", longitude: " + longitude);
     latitude += Math.random()*0.005;
     longitude += Math.random()*0.005;
 	var url = window.location.origin + "/updateLocation/" + userId + "/" + latitude + "/" + longitude;
@@ -34,7 +33,6 @@ $( document ).ready(function() {
     getUserList(sessionId);
 });
 
-
 function getUserList(sessionId) {
     var url = window.location.origin + "/getCurrentUsers/" + sessionId;
     $.get( url, function( data ) {
@@ -44,17 +42,16 @@ function getUserList(sessionId) {
             displayedJoinedUsers = joinedUsers;
             $("#joined_sessions").empty();
             for(var i=0; i<displayedJoinedUsers.length; i++) {
-                $("#joined_sessions").append('<li>' + joinedUsers[i] + '</li>');
+                $("#joined_sessions").append('<li class="list-group-item">' + joinedUsers[i] + '</li>');
             }
         }
         if(JSON.stringify(unjoinedUsers) != JSON.stringify(displayedUnjoinedUsers)) {
             displayedUnjoinedUsers = unjoinedUsers;
             $("#unjoined_sessions").empty();
             for(var i=0; i<displayedUnjoinedUsers.length; i++) {
-                $("#unjoined_sessions").append('<li>' + unjoinedUsers[i] + '</li>');
+                $("#unjoined_sessions").append('<li class="list-group-item">' + unjoinedUsers[i] + '</li>');
             }
         }
-
     });
-    setTimeout(getUserList(sessionId), 3000);
+    setTimeout(getUserList(sessionId), 10000);
 }

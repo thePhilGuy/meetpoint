@@ -79,6 +79,9 @@ public class SessionController extends Controller {
 
     public static Result getMeetPoints(Long sessionId) {
         Session s = Session.find.byId(sessionId);
+        if(s == null) {
+            return badRequest();
+        }
         ObjectNode result = Json.newObject();
         List<Position> list = new ArrayList<Position>();
         for(User u : s.joinedUsers) {
@@ -102,6 +105,9 @@ public class SessionController extends Controller {
 
     public static Result getCurrentUsers(Long sessionId) {
         Session s = Session.find.byId(sessionId);
+        if(s == null) {
+            return badRequest();
+        }
         ObjectNode result = Json.newObject();
         List<String> joinedUserNames = new ArrayList<String>();
         List<String> unjoinedUserNames = new ArrayList<String>();

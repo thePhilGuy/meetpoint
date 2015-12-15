@@ -99,4 +99,20 @@ public class SessionControllerTest extends TestCase {
             }
         });
     }
+
+    public void testGetCurrentUsers() throws Exception {
+        running(fakeApplication(), new Runnable() {
+            public void run() {
+                Session session = new Session();
+                User user = new User();
+                user.latitude = 41.0;
+                user.longitude = 41.0;
+                user.save();
+                session.joinedUsers.add(user);
+                session.save();
+                Result result = SessionController.getCurrentUsers(1L);
+                assertThat(status(result)).isEqualTo(OK);
+            }
+        });
+    }
 }
