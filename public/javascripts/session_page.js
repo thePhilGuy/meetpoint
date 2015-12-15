@@ -34,6 +34,7 @@ $( document ).ready(function() {
 });
 
 function getUserList(sessionId) {
+    console.log("getUserList called");
     var url = window.location.origin + "/getCurrentUsers/" + sessionId;
     $.get( url, function( data ) {
         var joinedUsers = data.joinedUsersList;
@@ -52,6 +53,6 @@ function getUserList(sessionId) {
                 $("#unjoined_sessions").append('<li class="list-group-item">' + unjoinedUsers[i] + '</li>');
             }
         }
-        setTimeout(getUserList(sessionId), 10000);
+        setTimeout(function() { getUserList(sessionId); }, 3000);
     });
 }
