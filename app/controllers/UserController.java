@@ -22,7 +22,7 @@ public class UserController extends Controller {
     }
 
     public static Result showUser(Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot show another user page.");
         List<User> users = User.find.where().eq("id", userId).findList();
         if (users.size() == 0) {
             return badRequest();
@@ -33,7 +33,7 @@ public class UserController extends Controller {
     }
 
     public static Result joinSession(Long sessionId, Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot join session for another user.");
         User u = User.find.byId(userId);
         Session s = Session.find.byId(sessionId);
         s.joinedUsers.add(u);
@@ -44,7 +44,7 @@ public class UserController extends Controller {
     }
 
     public static Result updateLocation(Long userId, double lat, double lng) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot update other user location.");
         User u = User.find.byId(userId);
         u.latitude = lat;
         u.longitude = lng;
