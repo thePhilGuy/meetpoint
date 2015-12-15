@@ -24,7 +24,7 @@ public class SessionController extends Controller {
     }
 
     public static Result createSession(Long userId, String name) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot create session for another user.");
         System.out.println(userId);
         System.out.println(name);
         List<Session> sessions = Session.find.where().eq("name", name).findList();
@@ -43,7 +43,7 @@ public class SessionController extends Controller {
     }
 
     public static Result showSession(Long sessionId, Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot view session as another user.");
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         User h = User.find.byId(s.hostId);
@@ -55,7 +55,7 @@ public class SessionController extends Controller {
     public static Result inviteUser(Long sessionId, String userName) {
         System.out.println("Inviting user " + userName + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
-        if(!session("user_id").equals(s.hostId.toString())) return forbidden();
+        if(!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can invite users.");
         List<User> users = User.find.where().eq("name", userName).findList();
         if(users.size() == 0) {
             return badRequest();
@@ -71,7 +71,7 @@ public class SessionController extends Controller {
 
     public static Result updateMeetType(Long sessionId, String meetType) {
         Session s = Session.find.byId(sessionId);
-        if(!session("user_id").equals(s.hostId.toString())) return forbidden();
+        if(!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can update meet type.");
         s.meetType = meetType;
         s.update();
         return ok();
@@ -93,7 +93,7 @@ public class SessionController extends Controller {
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden();
+        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot leave session for another user.");
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);
