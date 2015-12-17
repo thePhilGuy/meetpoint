@@ -1,13 +1,10 @@
 package controllers;
 
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.google.gson.JsonArray;
 import models.*;
-import play.api.libs.json.JsObject;
 import play.libs.Json;
 import play.mvc.*;
 import utility.FacebookWrapper;
-import views.html.session;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +21,9 @@ public class SessionController extends Controller {
     }
 
     public static Result createSession(Long userId, String name) {
-        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot create session for another user.");
+        if(request() != null) {
+            if(!session("user_id").equals(userId.toString())) return forbidden("Cannot create session for another user.");
+        }
         System.out.println(userId);
         System.out.println(name);
         List<Session> sessions = Session.find.where().eq("name", name).findList();
@@ -36,6 +35,13 @@ public class SessionController extends Controller {
         session.name = name;
         session.meetType = "";
         User user = User.find.byId(userId);
+        if(user == null) {
+            System.out.println("user not exist");
+        }
+        System.out.println(user.name);
+        if(session.joinedUsers == null) {
+            System.out.println("user list is wrong");
+        }
         session.joinedUsers.add(user);
         session.save();
         user.update();
@@ -43,19 +49,23 @@ public class SessionController extends Controller {
     }
 
     public static Result showSession(Long sessionId, Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot view session as another user.");
+        if(request() != null) {
+            if(!session("user_id").equals(userId.toString())) return forbidden("Cannot view session as another user.");
+        }
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         User h = User.find.byId(s.hostId);
         u.friends = FacebookWrapper.getFriends(u.userAccessToken);
         u.update();
-        return ok(session.render(s, u, h));
+        return ok(views.html.session.render(s, u, h));
     }
 
     public static Result inviteUser(Long sessionId, String userName) {
         System.out.println("Inviting user " + userName + " to session " + sessionId);
         Session s = Session.find.byId(sessionId);
-        if(!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can invite users.");
+        if(request() != null) {
+            if(!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can invite users.");
+        }
         List<User> users = User.find.where().eq("name", userName).findList();
         if(users.size() == 0) {
             return badRequest();
@@ -71,7 +81,9 @@ public class SessionController extends Controller {
 
     public static Result updateMeetType(Long sessionId, String meetType) {
         Session s = Session.find.byId(sessionId);
-        if(!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can update meet type.");
+        if(request() != null) {
+            if (!session("user_id").equals(s.hostId.toString())) return forbidden("Only host can update meet type.");
+        }
         s.meetType = meetType;
         s.update();
         return ok();
@@ -93,7 +105,9 @@ public class SessionController extends Controller {
     }
 
     public static Result leaveSession(Long sessionId, Long userId) {
-        if(!session("user_id").equals(userId.toString())) return forbidden("Cannot leave session for another user.");
+        if(session() != null) {
+            if(!session("user_id").equals(userId.toString())) return forbidden("Cannot leave session for another user.");
+        }
         Session s = Session.find.byId(sessionId);
         User u = User.find.byId(userId);
         s.joinedUsers.remove(u);

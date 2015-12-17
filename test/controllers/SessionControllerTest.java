@@ -3,6 +3,8 @@ package controllers;
 import junit.framework.TestCase;
 import models.Session;
 import models.User;
+import org.mockito.Mockito;
+import play.mvc.Http;
 import play.mvc.Result;
 import static org.fest.assertions.Assertions.assertThat;
 import static play.mvc.Http.Status.BAD_REQUEST;
@@ -14,7 +16,10 @@ import static play.mvc.Http.Status.SEE_OTHER;
 
 public class SessionControllerTest extends TestCase {
 
+    Http.Context context = Mockito.mock(Http.Context.class);
+
     public void testCreateSession() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 User user = new User();
@@ -26,6 +31,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testShowSession() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 User user = new User();
@@ -42,6 +48,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testInviteUser() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Session session = new Session();
@@ -58,6 +65,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testLeaveSession() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 User user = new User();
@@ -73,6 +81,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testUpdateMeetType() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Session session = new Session();
@@ -84,6 +93,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testGetMeetPoints() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 SessionController.Position p = new SessionController.Position(42.0, 42.0);
@@ -101,6 +111,7 @@ public class SessionControllerTest extends TestCase {
     }
 
     public void testGetCurrentUsers() throws Exception {
+        Http.Context.current.set(context);
         running(fakeApplication(), new Runnable() {
             public void run() {
                 Session session = new Session();

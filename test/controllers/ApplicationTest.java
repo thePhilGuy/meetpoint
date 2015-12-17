@@ -13,7 +13,7 @@ import static play.test.Helpers.status;
 public class ApplicationTest extends TestCase {
 
     private String facebookId = "863985690389295";
-    private String token = "CAAMvyLljWPMBAC46bSCkSN947TGjWKn4VLoszwbf2hFkXuaaLZB3cOdqYJZB2vibAVl6bTdVKMAZCmholOj86IsKatE1Re3zvt2fIHRsnt4FovuT8If8RIlD88OV8Q5d0V0Txjk36ubB9E76Xp8q6p29mlMQjeJbTeIKvKpJZBLoKsvLnEIMgNwSuRwCPBjR2oOgTG4ylQZDZD";
+    private String token = "CAAMvyLljWPMBAJaHaghLcHDSHJBY19mAZCwF2UuQjGJKYrgGBuNeUgjpG6hIlQuU2vsDM5IkdwQMXZBHqoPc3VdpHTrLQ1uFRsUBJU4C3UL2q3RzP3wUEv7yzEJ0sEKuTSDTusAq3Mjp2yK07HTIIw1BO73oVn8k8XvUZBsY5G9cyxo2XxfMMfACnZAg12XNSeuHAly4FQZDZD";
 
     public void testLogin() throws Exception {
         running(fakeApplication(), new Runnable() {
