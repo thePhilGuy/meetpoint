@@ -19,7 +19,9 @@ public class Application extends Controller {
             return UserController.createUser(facebookId, accessToken);
         } else {
             users.get(0).updateFacebookToken(accessToken);
-            //session("user_id", users.get(0).id.toString());
+            if(request() != null) {
+                session("user_id", users.get(0).id.toString());
+            }
             return redirect("/user/" + users.get(0).id);
         }
     }
