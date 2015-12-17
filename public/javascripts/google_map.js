@@ -90,7 +90,7 @@ function drawMarkers() {
 			if(type && type != 'default') {
 				var request = {
 					location: avgLocation,
-					radius: 300,
+					radius: 350,
 					types: [type]
 				};
 				var service = new google.maps.places.PlacesService(map);
